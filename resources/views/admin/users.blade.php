@@ -29,10 +29,19 @@
                         <h4 class="page-title">Users</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Log Out</li>
-                                </ol>
+                                    <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="{{URL::asset('/')}}">Home</a></li>
+                                            <li  class="breadcrumb-item">
+                                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                  document.getElementById('logout-form').submit();">
+                                                     {{ __('Logout') }}
+                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
+                                                 </a>
+                                              </li>
+                                        </ol>
                             </nav>
                         </div>
                     </div>

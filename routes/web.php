@@ -22,6 +22,16 @@ Route::get('/form', function(){
 });
 
 
+Route::get('/date', function(){
+    return view('datepicker');
+});
+
+Route::get('/booking', function(){
+    return view('booking');
+});
+
+
+
 
 // DASHBOARD ROUTES
 

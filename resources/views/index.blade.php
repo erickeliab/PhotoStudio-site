@@ -184,6 +184,15 @@
                                     </div>
                         </div>  
             </div>
+            <div class="col-md-12 form-group">
+                <label class="m-t-15">Autoclose Datepicker</label>
+                                 <div class="input-group">
+                                     <input type="text" class="form-control" id="datepicker-autoclose" placeholder="mm/dd/yyyy">
+                                     <div class="input-group-append">
+                                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                     </div>
+                                 </div>
+                             </div>
             <hr>
                <div id="bookbtn" class="form-group text-center col-md-3 mb-3 mb-lg-0 col-lg-3 "></div>
                <center>

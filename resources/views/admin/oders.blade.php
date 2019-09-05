@@ -60,7 +60,7 @@
                                 <div class="d-flex flex-row comment-row">
                                         <div class="p-2"><img src="assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle"></div>
                                         <div class="comment-text active w-100">
-                                            <h6 class="font-medium">{{$od-> name}}</h6>  <a href="orders/{{$od->order_id}}/edit" class="float-right">Update</a>  
+                                            <h6 class="font-medium">{{$od-> username}}</h6>  <a href="orders/{{$od->order_id}}/edit" class="float-right">Update</a>  
                                             <span class="m-b-15 d-block">Booked for <h3> {{$od -> service}}</h3>
                                                  that will be held on {{$od -> ocdate}}
                                               

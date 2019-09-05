@@ -53,7 +53,26 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this -> validate($request,[
+            'name'=> 'required',
+            'service' => 'required',
+            'date' => 'required',
+            'phone' => 'required'
+        ]);
+
+        $order = new Order;
+        $order -> username = $request -> input('name');
+        $order -> phone = $request -> input('phone');
+        
+        $initdate = $request -> input('date');
+        $data = ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'];
+       $serv = $request -> input('service');
+        $newdt = date("Y-m-d",strtotime($initdate));
+        $order -> ocdate = $newdt;
+        $order -> service = $data[$serv];
+          $order -> save();
+
+        return redirect('/orders')->with('success','you have successful added an order');
     }
 
     /**
@@ -77,7 +96,7 @@ class OrdersController extends Controller
     {
         $order = Order::findOrfail($id);
 
-        return view('admin.editorder')->with('order',$order);
+        return view('admin.editorder')->with('od',$order);
     }
 
     /**
@@ -89,7 +108,19 @@ class OrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $order = Order::find($id);
+        $order -> username = $request -> input('name');
+        $order -> phone = $request -> input('phone');
+        
+        $initdate = $request -> input('date');
+        $data = ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'];
+       $serv = $request -> input('service');
+        $newdt = date("Y-m-d",strtotime($initdate));
+        $order -> ocdate = $newdt;
+        $order -> service = $data[$serv];
+          $order -> save();
+        return redirect('/orders')->with('success','You have successfully updated an order');
     }
 
     /**

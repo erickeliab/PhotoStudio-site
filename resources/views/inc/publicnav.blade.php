@@ -12,7 +12,7 @@
         <a class="nav-link"  href="{{URL::asset('/servicez')}}">Services</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  href="{{URL::asset('/#formOps')}}">Book Now</a>
+        <a class="nav-link"  href="{{URL::asset('/booking')}}">Book Now</a>
       </li>
       <li class="nav-item">
         <a class="nav-link"  href="{{URL::asset('/about')}}">About</a>

@@ -29,18 +29,28 @@
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Log Out</li>
+                                    <li class="breadcrumb-item"><a href="{{URL::asset('/')}}">Home</a></li>
+                                    <li  class="breadcrumb-item">
+                                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                          document.getElementById('logout-form').submit();">
+                                             {{ __('Logout') }}
+                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                         </a>
+                                      </li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+           
             
             @include('inc.board')
                 <hr>
-                <h5>Add Service</h5>
+                <h5>Add Order</h5>
                 <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -49,68 +59,65 @@
                     </div>
                     <hr>
                 <div class="container">
-                        <div class="col-md-12 form-group">
+                        <div class="col-md-12 form-group ">
                 {{--  BEGINING OF THE FORM  --}}
 
-           {!! Form::open(['method' => 'post', 'action' => ['ServicesController@store']]) !!}
-           <div class="row">
+           {!! Form::open(['method' => 'post', 'action' => ['OrdersController@store']]) !!}
+           <div class="row well">
              <div class="col-md-6 container">
                   
               <div class="col-md-12 form-group">
-                    {!! Form::label('name', 'Service', []) !!}
-                    {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => 'Service name'])}}
+                    {!! Form::label('name', 'Name of the customer', []) !!}
+                    {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => 'name'])}}
+                  
+               </div>
+               
+               
+                
+               <div class="col-md-12 form-group">
+                   
+                   {!! Form::label('phone', 'phone', []) !!}
+                   
+                    {{Form::text('phone','', ['class' => 'form-control' , 'placeholder' => 'phone'])}}
                   
                </div>
                <div class="col-md-12 form-group">
-                   
-                   {!! Form::label('price', 'Price', []) !!}
-                   
-                    {{Form::text('price','', ['class' => 'form-control' , 'placeholder' => 'Price'])}}
-                  
-               </div>
-               <div class="col-md-12 form-group">
-                    {!! Form::label('serv_descr', 'Description', []) !!}
-                    {{Form::textarea('serv_descr','', ['class' => 'form-control' , 'placeholder' => 'Service Description'])}}
-               </div>
-               <div class="col-md-12 form-group">
-               <label class="m-t-15">Autoclose Datepicker</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="datepicker-autoclose" placeholder="mm/dd/yyyy">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div>
-                            </div>
+                    {!! Form::label('date', 'Date', []) !!}
+                    <div class="input-group">
+                    
+                    
+                     {{Form::text('date','', ['class' => 'form-control' , 'placeholder' => 'mm/dd/yyyy','id'=>'datepicker-autoclose'])}}
+                     <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                     </div>
+                    </div>
+                </div>
+              
+                <div class="col-md-12 form-group">
+                        {!! Form::label('service', 'Service', []) !!}
+                        {!! Form::select('service', ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'], 'G') !!}
+                      
+                   </div>
+               
+             
                <div class="col-md-6 form-group">
-                    {{Form::hidden('path','assets/images/big/img1.jpg', ['class' => 'form-control' , 'placeholder' => 'GH'])}}
+                   
 
-                       {!! Form::submit('ADD SERVICE', ['class' => 'btn btn-primary']) !!}
+                       {!! Form::submit('ADD ORDER', ['class' => 'btn btn-primary']) !!}
                 </div>
              </div>
 
              <div class="col-md-6 container">
                   
                    
-                    <p class="mb-5"><img src="{{URL::asset('assets/images/big/img1.jpg')}}" alt="" class="img-fluid"></p>
+                    {{-- <p class="mb-5"><img src="{{URL::asset('assets/images/big/img1.jpg')}}" alt="" 'class'=>"img-fluid"></p> --}}
                              
                                    
                         
-                   </div>
+                  
+                </div>
            </div>
-              
-           <form action="">
-                <div class="col-md-12 form-group">
-                        <label class="m-t-15">Autoclose Datepicker</label>
-                                         <div class="input-group">
-                                             <input type="text" class="form-control" id="datepicker-autoclose" placeholder="mm/dd/yyyy">
-                                             <div class="input-group-append">
-                                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                             </div>
-                                         </div>
-                                     </div>
-           </form>
-              
-
+     
            {{--  EBD OF THE FORM  --}}
                     
                </div>

@@ -13,12 +13,11 @@
     <div id="main-wrapper">
        
         <header class="topbar" data-navbarbg="skin5">
-           
-                    @include('inc.adminav2')
+                @include('inc.adminav2')
         </header>
         
            <!-- HERE GOES THE SIDE BAR THAT NAVIGATES TO OTHER ADNMIN PAGES -->
-         
+           @include('inc.admin_navbar')
         <!-- END OF THE NAVIGATION BAR -->
       
         <div class="page-wrapper">
@@ -39,9 +38,9 @@
                 </div>
             </div>
             
-            @include('inc.board')    
+            @include('inc.board')
                 <hr>
-                <h5>All the services</h5>
+                <h5>Add Order</h5>
                 <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -50,44 +49,69 @@
                     </div>
                     <hr>
                 <div class="container">
-                   
+                        <div class="col-md-12 form-group ">
                 {{--  BEGINING OF THE FORM  --}}
 
-           {!! Form::open(['method' => 'put', 'action' => ['OrdersController@store']]) !!}
-           <div class="row">
-             <div class="col-md-6 form-group">
+           {!! Form::open(['method' => 'post', 'action' => ['OrdersController@update',$od->order_id]]) !!}
+           <div class="row well">
+             <div class="col-md-6 container">
                   
-                   {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => 'Your name'])}}
-             </div>
-           
-             <div class="col-md-6 form-group">
+              <div class="col-md-12 form-group">
+                    {!! Form::label('name', 'Name of the customer', []) !!}
+                    {{Form::text('name',$od->username, ['class' => 'form-control' , 'placeholder' => 'name'])}}
                   
-                   {{Form::text('phone','', ['class' => 'form-control' , 'placeholder' => 'Phone'])}}
-                </div>
-                </div>
-                <div class="row">
-               <div class="col-md-6 form-group">
-                             
-                     {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => 'Your name'])}}
-              </div>
-                      
-              <div class="col-md-6 form-group">
-                             
-                  {{Form::text('phone','', ['class' => 'form-control' , 'placeholder' => 'Your Phone'])}}
-             </div>
-             </div>
+               </div>
+               
+               
+                
+               <div class="col-md-12 form-group">
                    
+                   {!! Form::label('phone', 'phone', []) !!}
+                   
+                    {{Form::text('phone',$od->phone, ['class' => 'form-control' , 'placeholder' => 'phone'])}}
+                  
+               </div>
+               <div class="col-md-12 form-group">
+                    {!! Form::label('date', 'Date', []) !!}
+                    <div class="input-group">
+                    
+                    
+                     {{Form::text('date',$od->ocdate, ['class' => 'form-control' , 'placeholder' => 'mm/dd/yyyy','id'=>'datepicker-autoclose'])}}
+                     <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                     </div>
+                    </div>
+                </div>
+              
+                <div class="col-md-12 form-group">
+                        {!! Form::label('service', 'Service', []) !!}
+                        {!! Form::select('service', ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'], null) !!}
+                      
+                   </div>
+               
              
-               <div class="row">
                <div class="col-md-6 form-group">
-                      {!! Form::submit('Send Message', ['class' => 'btn btn-primary']) !!}
-               </div>
-               </div>
-            {!! Form::close() !!}
+                    {{Form::hidden('_method','PUT')}}
+                  
 
+                       {!! Form::submit('UPDATE', ['class' => 'btn btn-primary']) !!}
+                </div>
+             </div>
+
+             <div class="col-md-6 container">
+                  
+                   
+                    {{-- <p class="mb-5"><img src="{{URL::asset('assets/images/big/img1.jpg')}}" alt="" 'class'=>"img-fluid"></p> --}}
+                             
+                                   
+                        
+                  
+                </div>
+           </div>
+     
            {{--  EBD OF THE FORM  --}}
                     
-
+               </div>
                 </div>     
                        </div>
           
@@ -96,7 +120,16 @@
             </footer>
           
         </div>
-      
+      <script>
+            jQuery('.mydatepicker').datepicker();
+            jQuery('#datepicker-autoclose').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+            var quill = new Quill('#editor', {
+                theme: 'snow'
+            });
+      </script>
     </div>
   @endsection  
     
