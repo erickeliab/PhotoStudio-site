@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service;
+use App\User;
+use App\Order;
 
 class PagesController extends Controller
 {
@@ -18,7 +20,8 @@ class PagesController extends Controller
        }
 
        public function about(){
-        return view('about');
+           $users = User::all();
+        return view('about')->with('users',$users);
        }
 
        public function contact(){
@@ -37,16 +40,10 @@ class PagesController extends Controller
 
     //DASHBOARD ROUTES CONTROLLER FUNCTIONS
 
-    public function getregister(){
-       
-        return view('admin.adduser');
-    }
-    public function home(){
-     return view('admin.dashboard');
-    }
-
+   
+   
     public function adm(){
-        return view('admin.dashboardmin.dashboard');
+        return view('admin.dashboard');
        }
 
        public function admnserv(){

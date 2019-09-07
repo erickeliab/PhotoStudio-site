@@ -66,10 +66,10 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1"> <img src="{{$service->imagepath}}" alt="user" />
+                                <div class="el-card-avatar el-overlay-1"> <img src="{{URL::asset('storage/CoverImages/'.$service->imagepath)}}" alt="user" />
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
-                                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
+                                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="storage/CoverImages/{{$service->imagepath}}"><i class="mdi mdi-magnify-plus"></i></a></li>
                                             <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
                                         </ul>
                                     </div>
@@ -87,7 +87,7 @@
                                 
                                 {!! Form::close() !!}
                                 
-
+ {{--  /opt/lampp/htdocs/app/blog/public/storage/CoverImages/vlcsnap-2019-09-01-23h11m36s6141567686834.png  --}}
 
                                 </div>
                             </div>

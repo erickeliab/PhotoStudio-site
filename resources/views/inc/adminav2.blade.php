@@ -47,10 +47,10 @@
         </div>
     </nav>  --}}
     {{--    --}}
-    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+    <nav class="navbar top-navbar navbar-expand-md navbar-dark fixed-top">
          <div class="navbar-header" data-logobg="skin5">
        
-            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+            <a class="nav-toggler waves-effect waves-light d-block d-md-none " href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
             
             <a class="navbar-brand" href="index.html">
               
@@ -80,7 +80,9 @@
                          <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @if(Auth::user()->id == 1)
                             <a class="dropdown-item" href="{{URL::asset('/aduser')}}">Add User</a>
+                            @endif
                             <a class="dropdown-item" href="{{URL::asset('services/create')}}">Add Services</a>
                             <a class="dropdown-item" href="{{URL::asset('orders/create')}}">Add Order</a>                            
                         </div>
@@ -97,13 +99,13 @@
       
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <!-- Left Side Of Navbar -->
-                  <ul class="navbar-nav mr-auto">
-                     <li> <a href="{{URL::asset('/')}}" class="nav-item float-right text-white">Home</a></li>
-                  </ul>
+                
       
                   <!-- Right Side Of Navbar -->
                   <ul class="navbar-nav ml-auto">
-                      
+                        
+                                {{--  <li class="nav-item"> <a href="{{URL::asset('/')}}" class="nav-item text-white">Home</a></li>  --}}
+                            
                       <!-- Authentication Links -->
                       @guest
                           <li class="nav-item">

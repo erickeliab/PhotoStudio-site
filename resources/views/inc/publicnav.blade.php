@@ -42,7 +42,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item text-dark" href="{{ URL::asset('/dashboard') }}">  {{ __('Dashboard') }}</a>
+                        <a class="dropdown-item text-dark" href="{{ URL::asset('/dashboards') }}">  {{ __('Dashboard') }}</a>
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();

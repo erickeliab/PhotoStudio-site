@@ -24,14 +24,19 @@ $usr = User::all();
                     </div>
                 </div>
             </div>
+          
             <!-- Column -->
             <div class="col-md-6 col-lg-4 col-xlg-3">
                 <div class="card card-hover">
                     <div class="box bg-success text-center">
                         <h1 class="font-light text-white"><i class="fa fa-user m-b-5 font-16"></i></h1>
+                        @if(Auth::user()->id == 1)
                         <h6 class="text-white">Users</h6>
+                       
                         <h5 class="text-white">{{count($usr)}}</h5>
                        
+                    
+                        @endif
                     </div>
                 </div>
             </div>

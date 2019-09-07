@@ -15,7 +15,7 @@
         </div>
       </div>
 
-
+    </section>
     <section class="section element-animate">
       
       <div class="container">
@@ -27,7 +27,7 @@
           @foreach($services as $service)
                 <div class="col-md-6 mb-4">
                     <div class="blog d-block d-lg-flex">
-                      <div class="bg-image" style="background-image: url('{{$service->imagepath}}');"></div>
+                      <div class="bg-image" style="background-image: url('storage/CoverImages/{{$service->imagepath}}');"></div>
                       <div class="text">
                         <h3>{{$service->serv_name}}</h3>
                         <p class="sched-time">
@@ -50,6 +50,6 @@
         </div>
       </div>
 
-    
+    </section> 
 
     @endsection

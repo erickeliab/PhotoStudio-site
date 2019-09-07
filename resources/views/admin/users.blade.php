@@ -62,10 +62,10 @@
                             <table class="table">
                                   <thead>
                                     <tr>
-                                      <th scope="col">No</th>
+                                      
                                       <th scope="col">Name</th>
-                                      <th scope="col">Email</th>
-                                      <th scope="col">Phone</th>
+                                      <th scope="col">Email and Phone</th>
+                                     
                                       <th scope="col"></th>
                                     </tr>
                                   </thead>
@@ -73,10 +73,10 @@
                                       @if(count($users)>0)
                                         @foreach($users as $user)
                                         <tr>
-                                                <th scope="row">{{$user->id}}</th>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->email}}</td>
-                                                <td>{{$user->phone}}</td>
+                                                <th scope="row"><h5>{{$user->name}}</h5>  <a href="users/{{$user->id}}/edit" class="btn btn-default">Edit</a></th>
+                                              
+                                                <td>{{$user->email}}</br>{{$user->phone}}</td>
+                                                
                                                 <td>
                                                                     {!! Form::open(['method' => 'DELETE', 'action' => ['UsersController@destroy',$user->id],'class' => 'pull-right']) !!}
                                             

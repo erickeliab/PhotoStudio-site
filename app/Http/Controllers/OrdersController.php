@@ -75,6 +75,7 @@ class OrdersController extends Controller
         return redirect('/orders')->with('success','you have successful added an order');
     }
 
+  
     /**
      * Display the specified resource.
      *

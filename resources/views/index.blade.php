@@ -3,11 +3,13 @@
 
     @section('content')
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('img/hero_1.jpg');">
-        
-        @if(count($services) < 0 )
-
+        @if(count($services) > 0 )
         @foreach ($services as $item)
+      <div class="slider-item" style="background-image: url('storage/CoverImages/{{$item->imagepath}}')">
+        
+       
+
+       
         <div class="container">
             <div class="row slider-text align-items-center justify-content-center">
               <div class="col-md-8 text-center col-sm-12 element-animate">
@@ -15,7 +17,7 @@
                 <p class="mb-5">
        {{$item->serv_descr}}
         </p>
-                <p><a href="#" class="btn btn-white btn-outline-white">Book Now</a></p>
+                <p><a href="{{URL::asset('/booking')}}" class="btn btn-white btn-outline-white">Book Now</a></p>
               </div>
             </div>
           </div>
@@ -101,16 +103,29 @@
 
     </section>
     <!-- END slider -->
-    
+    <?php $i=0; ?>
 
     <section class="section bg-light element-animate">
       <div class="container">
         <div class="row">
+            @if(count($services) > 0 )
+            @foreach ($services as $item)
+            <?php $i++; ?>
+            @if($i < 5)
+
           <div class="col-md-6 mb-4 mb-lg-0 col-lg-3 text-center">
-            <h4 class="mb-4 text-primary">Wedding</h4>
+            <h4 class="mb-4 text-primary">{{$item->serv_name}}</h4>
+            <p>{{$item->serv_descr}}</p>
+          </div>
+          @endif
+         @endforeach
+
+         @else 
+         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3 text-center">
+            <h4 class="mb-4 text-primary">Birthdays</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae hic maiores. Velit nisi, reprehenderit, nobis officia.</p>
           </div>
-          <div class="col-md-6 mb-4 mb-lg-0 col-lg-3 text-center">
+         <div class="col-md-6 mb-4 mb-lg-0 col-lg-3 text-center">
             <h4 class="mb-4 text-primary">Birthdays</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae hic maiores. Velit nisi, reprehenderit, nobis officia.</p>
           </div>
@@ -121,7 +136,10 @@
           <div class="col-md-6 mb-4 mb-lg-0 col-lg-3 text-center">
             <h4 class="mb-4 text-primary">Baby Shower</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae hic maiores. Velit nisi, reprehenderit, nobis officia.</p>
-          </div>
+          </div> 
+
+         @endif
+          
         </div>
       </div>
     </section>
@@ -134,25 +152,32 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 text-center heading-wrap">
-              <h2>Book Here</h2>
-              <span class="back-text-dark" id="formOps">Book</span>
+              <h2>Book Now</h2>
+              <div class="containter well align-center">
+                  <center>
+                  <a href="{{URL::asset('/booking')}}" class="btn btn-primary">GO TO THE BOOKING PAGE</a>
+                  </center>
+                </div>
+              <span class="back-text-dark" id="formOps"></span>
+             
             </div>
           </div>
         </div>
       </div>
+     
 {{--    --}}
-{!! Form::label('date', 'Date: ' ) !!}
+{{--  {!! Form::label('date', 'Date: ' ) !!}
 <div class="form-group input-group date">
     {!! Form::text('date', null, ['class' => 'form-control']) !!}
     <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
     </span>
-</div>
+</div>  --}}
 
 
         {{--  HERE GOES THE FORM FOR THE ORDERS OR BOOKINGS  --}}
 
-        <form class="well container" action="" method="post" id="booknow">
+        {{--  <form class="well container" action="" method="post" id="booknow">
             <div class="container row" id="form">
                 <div class="col-md-3 mb-3 mb-lg-0 col-lg-3 text-center">
                 <input type="text" name="name" id="nameid" placeholder="Name">
@@ -202,7 +227,7 @@
                </center>
 
                
-        </form>
+        </form>  --}}
 
         {{--  END OF THE BOOKING FORM  --}}
 
@@ -234,11 +259,9 @@
     
 @foreach ($services as $service)
 
-    
-@endforeach
 <div class="col-md-6">
     <div class="sched d-block d-lg-flex">
-      <div class="bg-image order-2" style="background-image: url('img/dishes_2.jpg');"></div>
+      <div class="bg-image order-2" style="background-image: url('storage/CoverImages/{{$service->imagepath}}');"></div>
       <div class="text order-1">
         <h3>{{$service->serv_name}}</h3>
         <p>{{$service->serv_descr}}</p>
@@ -247,6 +270,8 @@
       </div>
       
     </div>
+@endforeach
+
 
 @else
 <div class="sched d-block d-lg-flex">
@@ -304,25 +329,24 @@
 
 </div>
 
-      </div>
+</div>
     </section> <!-- .section -->
 
 
        
     
-    <section class="py-5 bg-light">
+  <section class="py-5 bg-light">
       <div class="container">
           @include('inc.alerts')
-        <div class="row justify-content-center">
-          <div class="col-lg-6 text-center">
-            <div class="row">
-              <div class="col-md-12">
-                <h3>Quick Message</h3>
-                <p>Tell us about our services, your opinions mean a world to us</p>
-              </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h3>Quick Message</h3>
+                      <p>Tell us about our services, your opinions mean a world to us</p>
+                  </div>
 
-              {{--  QUICK MESSAGE FORM  --}}
-
+            
               
               {!! Form::open(['method' => 'post', 'action' => ['MessagesController@store'], 'class' => 'col-12']) !!}
               <div class="row align-items-center">
@@ -338,13 +362,12 @@
               
               {!! Form::close() !!}
               
-              
-
-              {{--  END OF THE FORM  --}}
-            </div>
+            </div> 
+          </div> 
+            
           </div>
-        </div>
       </div>
-    </section>
+     
+  </section>
 
 @endsection

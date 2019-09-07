@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Service;
 use DB;
 
@@ -16,7 +17,7 @@ class ServicesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['show']]);
     }
 
 
@@ -54,7 +55,21 @@ class ServicesController extends Controller
             'serv_descr' => 'required',
             'price' => 'required',
             'name' => 'required',
+            'CoverImage' => 'image|nullable|max:1999'
         ]);
+
+            //Hndle fileupload
+            if($request -> hasFile('CoverImage')){
+                $file = $request -> file('CoverImage')->getClientOriginalName();
+                $fileWithought = pathinfo($file , PATHINFO_FILENAME);
+                $extension = $request -> file('CoverImage')-> getClientOriginalExtension();
+
+                $filename = $fileWithought.time().'.'.$extension;
+
+                $path = $request -> file('CoverImage')-> storeAs('public/CoverImages', $filename);
+            }else{
+                $filename = 'defaultImage.png';
+            }
 
 
       $service = new Service;
@@ -62,7 +77,7 @@ class ServicesController extends Controller
       $service -> serv_descr = $request -> input('serv_descr');
       $service -> price = $request -> input('price');
       $service -> serv_name = $request -> input('name');
-      $service -> imagepath = $request -> input('path');
+      $service -> imagepath = $filename;
       $service -> save();
 
      return redirect('/services')->with('success','Service Added');
@@ -80,7 +95,7 @@ class ServicesController extends Controller
         
      
         $serv = Service::find($id);
-       return view('service')->with('services',$serv);
+       return view('admin.service')->with('services',$serv);
         
     }
 
@@ -109,15 +124,24 @@ class ServicesController extends Controller
             'serv_descr' => 'required',
             'price' => 'required',
             'name' => 'required',
+            'CoverImage' => 'image|nullable|max:1999'
         ]);
+              //Hndle fileupload
+              if($request -> hasFile('CoverImage')){
+                $file = $request -> file('CoverImage')->getClientOriginalName();
+                $fileWithought = pathinfo($file , PATHINFO_FILENAME);
+                $extension = $request -> file('CoverImage')-> getClientOriginalExtension();
 
+                $filename = $fileWithought.time().'.'.$extension;
 
+                $path = $request -> file('CoverImage')-> storeAs('public/CoverImages', $filename);
+            }
       $service = Service::find($id);
 
       $service -> serv_descr = $request -> input('serv_descr');
       $service -> price = $request -> input('price');
       $service -> serv_name = $request -> input('name');
-      $service -> imagepath = $request -> input('path');
+      $service -> imagepath = $filename;
       $service -> save();
 
      return redirect('/services')->with('success','Service successfully Updated');
@@ -133,7 +157,11 @@ class ServicesController extends Controller
     public function destroy($id)
     {
         $sev = Service::find($id);
-
+        if($sev -> imagepath != 'DefaultImage.jpg'){
+            
+            Storage::delete('public/CoverImages/'.$sev->imagepath);
+            
+        }
         $sev -> delete();
         return redirect('/services')->with('success','service successfully deleted');
     }

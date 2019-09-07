@@ -34,6 +34,7 @@
      
    
     @yield('content')
+    
     <footer class="site-footer" role="contentinfo">
       <div class="container">
         <div class="row mb-5">
@@ -90,7 +91,7 @@
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#cf1d16"/></svg></div>
 
-      {{url('')}}
+     
     <script src="{{url('js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{url('js/popper.min.js')}}"></script>
     <script src="{{url('js/bootstrap.min.js')}}"></script>
@@ -109,51 +110,5 @@
 <script src="{{URL::asset('dist/dist/js/bootstrap-datepicker.min.js')}}"></script>
 {{--  <!-- <script src="{{URL::asset('dist/js/pages/dashboards/dashboard1.js')}}"></script> -->  --}}
 
-    <script>
-        //***********************************//
-        // For select 2
-        //***********************************//
-        $(".select2").select2();
-    
-        /*colorpicker*/
-        $('.demo').each(function() {
-        //
-        // Dear reader, it's actually very easy to initialize MiniColors. For example:
-        //
-        //  $(selector).minicolors();
-        //
-        // The way I've done it below is just for the demo, so don't get confused
-        // by it. Also, data- attributes aren't supported at this time...they're
-        // only used for this demo.
-        //
-        $(this).minicolors({
-                control: $(this).attr('data-control') || 'hue',
-                position: $(this).attr('data-position') || 'bottom left',
-    
-                change: function(value, opacity) {
-                    if (!value) return;
-                    if (opacity) value += ', ' + opacity;
-                    if (typeof console === 'object') {
-                        console.log(value);
-                    }
-                },
-                theme: 'bootstrap'
-            });
-    
-        });
-    
-    
-        /*datwpicker*/
-        jQuery('.mydatepicker').datepicker();
-        jQuery('#datepicker-autoclose').datepicker({
-            autoclose: true,
-            todayHighlight: true
-        });
-        
-        var quill = new Quill('#editor', {
-            theme: 'snow'
-        });
-    
-    </script>
   </body>
 </html>

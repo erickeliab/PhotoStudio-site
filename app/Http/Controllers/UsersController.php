@@ -28,6 +28,10 @@ class UsersController extends Controller
     {
 
         $user = User::all();
+
+        if(auth()->user()->id !== 1){
+            return redirect('/dashboards')->with('error','Unauthorized Page');
+        }else
         return view('admin.users')->with('users',$user);
 
     }
@@ -41,6 +45,12 @@ class UsersController extends Controller
     {
         //
     }
+    public function getregister(){
+        if(auth()->user()->id !== 1){
+            return redirect('/dashboards')->with('error','Unauthorized Page');
+        }else
+        return view('admin.adduser');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -50,6 +60,10 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->id !== 1){
+            return redirect('/dashboards')->with('error','Unauthorized Page');
+        }else
+
         $this -> validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:15'],
@@ -58,11 +72,26 @@ class UsersController extends Controller
             
         ]);
 
+               //Hndle fileupload
+               if($request -> hasFile('CoverImage')){
+                $file = $request -> file('CoverImage')->getClientOriginalName();
+                $fileWithought = pathinfo($file , PATHINFO_FILENAME);
+                $extension = $request -> file('CoverImage')-> getClientOriginalExtension();
+
+                $filename = $fileWithought.time().'.'.$extension;
+
+                $path = $request -> file('CoverImage')-> storeAs('public/CoverImages', $filename);
+            }else{
+                $filename = 'defaultUser.png';
+            }
+
+
         $user = new User;
         $user->name =$request -> input('name');
         $user->phone =$request -> input('phone');
         $user->email =$request -> input('email');
         $passwd = $request -> input('password');
+        $user->userimg =  $filename;
         $passwdnew = $request -> input('password');
         $pass = array('password' => $passwd );
         $user->password =Hash::make($pass['password']);
@@ -99,7 +128,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usr = User::findOrFail($id);
+
+        return view('admin.edituser')->with('user',$usr);
+       
     }
 
     /**
@@ -111,7 +143,24 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request -> hasFile('CoverImage')){
+            $file = $request -> file('CoverImage')->getClientOriginalName();
+            $fileWithought = pathinfo($file , PATHINFO_FILENAME);
+            $extension = $request -> file('CoverImage')-> getClientOriginalExtension();
+
+            $filename = $fileWithought.time().'.'.$extension;
+
+            $path = $request -> file('CoverImage')-> storeAs('public/CoverImages', $filename);
+        }
+        $user = new User;
+        $user->name =$request -> input('name');
+        $user->phone =$request -> input('phone');
+        $user->email =$request -> input('email');
+        $passwd = $request -> input('password');
+        $user->userimg =  $filename;
+        $passwdnew = $request -> input('password');
+        $pass = array('password' => $passwd );
+        $user->password =Hash::make($pass['password']);
     }
 
     /**
@@ -122,7 +171,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-      
+        if(auth()->user()->id !== 1){
+            return redirect('/admin.dashboards')->with('error','Unauthorized Page');
+        }else
         $user = User::findOrFail($id);
         $user->delete();
 

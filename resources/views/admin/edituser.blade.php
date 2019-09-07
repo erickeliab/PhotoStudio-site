@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 @extends('layouts.adminlayout')
 
 @section('content')
@@ -67,7 +59,7 @@
                         
                                        <div class="well container">
                                           
-                                            {!! Form::open(['method' => 'post', 'action' => ['UsersController@store'],'enctype'=>'multipart/form-data']) !!}
+                                            {!! Form::open(['method' => 'post', 'action' => ['UsersController@update',$user->id] , 'enctype' => 'multipart/form-data']) !!}
 
                                             <div class="well container  col-md-12" style="padding-top:6px; margin-top:12px">
                                                 
@@ -75,14 +67,14 @@
                                                         
                                                     <div class="row form-group">
                                                             {!! Form::label('name', '', []) !!}
-                                                            {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => ''])}}
+                                                            {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => $user->name ])}}
                                                           
                                                        </div>
                                                        <div class="row form-group">
                                                         
                                                             {!! Form::label('email', 'email', []) !!}
                                                             
-                                                             {{Form::text('email','', ['class' => 'form-control' , '' => ''])}}
+                                                             {{Form::text('email','', ['class' => 'form-control' , 'placeholder' => $user->email])}}
                                                            
                                                         </div>
 
@@ -90,7 +82,7 @@
                                                         
                                                                 {!! Form::label('phone', 'phone', []) !!}
                                                                 
-                                                                 {{Form::text('phone','', ['class' => 'form-control' ])}}
+                                                                 {{Form::text('phone','', ['class' => 'form-control' , 'placeholder' => $user->phone])}}
                                                                
                                                             </div>
                                                        <div class="row form-group">

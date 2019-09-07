@@ -10,53 +10,54 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//PUBLIC ROUTES
-Route::get('/', 'PagesController@index'); 
-Route::get('/about', 'PagesController@about'); 
-Route::get('/contact', 'PagesController@contact'); 
-Route::get('/service', 'PagesController@service');
-Route::get('/servicez', 'PagesController@services');
+    //PUBLIC ROUTES
+    Route::get('/', 'PagesController@index'); 
+    Route::get('/about', 'PagesController@about'); 
+    Route::get('/contact', 'PagesController@contact'); 
+    Route::get('/service', 'PagesController@service');
+    Route::get('/servicez', 'PagesController@services');
 
-Route::get('/form', function(){
-    return view('form');
-});
+    Route::post('/pressorder', 'bookingsController@add');
+    Route::get('/form', function(){
+        return view('form');
+    });
 
 
-Route::get('/date', function(){
-    return view('datepicker');
-});
+    Route::get('/date', function(){
+        return view('admin.edituser');
+    });
 
-Route::get('/booking', function(){
-    return view('booking');
-});
+    Route::get('/booking', function(){
+        return view('booking');
+    });
 
 
 
 
 // DASHBOARD ROUTES
 
-Route::get('/aduser', 'PagesController@getregister'); 
-Route::get('/dashboard', 'PagesController@home'); 
-Route::get('/adm', 'PagesController@adm'); 
-Route::get('/createuser', 'PagesController@usercreate'); 
+        Route::get('/aduser', 'UsersController@getregister'); 
+      
+        Route::get('/adm', 'PagesController@adm'); 
+        Route::get('/createuser', 'PagesController@usercreate'); 
 
-//Route::get('/users', 'PagesController@users'); 
-Route::get('/orders', 'PagesController@orders'); 
-Route::get('/admnservices', 'PagesController@admnserv'); 
-Route::get('/admmessages', 'PagesController@admmessages'); 
+        //Route::get('/users', 'PagesController@users'); 
+        Route::get('/orders', 'PagesController@orders'); 
+        Route::get('/admnservices', 'PagesController@admnserv'); 
+        Route::get('/admmessages', 'PagesController@admmessages'); 
 
-//MESSAGES ROUTES 
-Route::resource('messages','MessagesController');
-
-
-Route::resource('orders', 'OrdersController');
-
-Route::resource('users', 'UsersController');
-
-Route::resource('services', 'ServicesController');
+        //MESSAGES ROUTES 
+        Route::resource('messages','MessagesController');
 
 
+        Route::resource('orders', 'OrdersController');
 
-Auth::routes();
+        Route::resource('users', 'UsersController');
 
-Route::get('/dashboards', 'dashboardsController@index');
+        Route::resource('services', 'ServicesController');
+
+
+
+        Auth::routes();
+
+        Route::get('/dashboards', 'dashboardsController@index');

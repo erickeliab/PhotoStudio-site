@@ -60,7 +60,7 @@
                         <div class="col-md-12 form-group">
                 {{--  BEGINING OF THE FORM  --}}
 
-           {!! Form::open(['method' => 'post', 'action' => ['ServicesController@update',$services->service_id]]) !!}
+           {!! Form::open(['method' => 'post', 'action' => ['ServicesController@update',$services->service_id],'enctype' => 'multipart/form-data']) !!}
            <div class="row">
              <div class="col-md-6 container">
                   
@@ -82,7 +82,7 @@
                </div>
                <div class="col-md-6 form-group">
                     {{Form::hidden('path',$services->imagepath, ['class' => 'form-control' , 'placeholder' => $services->price])}}
-
+                    {!! Form::file('CoverImage') !!}
                     {{Form::hidden('_method','PUT')}}
                        {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
                 </div>
@@ -91,7 +91,7 @@
              <div class="col-md-6 container">
                   
                    
-                    <p class="mb-5"><img src="{{URL::asset($services->imagepath)}}" alt="" class="img-fluid"></p>
+                    <p class="mb-5"><img src="{{URL::asset('storage/CoverImages/'.$services->imagepath)}}" alt="" class="img-fluid"></p>
                              
                                    
                         

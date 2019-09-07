@@ -42,73 +42,64 @@
             </div>
             
             @include('inc.board')
-     
+     <hr>
+     <div class="container">
+            @include('inc.alerts')
+       </div>
                 
+       <div class="row">
+            <div class="col-md-12">
                 <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title m-b-0">Recent Activities</h4>
+                    <div class="card-body">
+                        <h4 class="card-title m-b-0">Recently Added Orders</h4>
+                    </div>
+                    <div class="comment-widgets scrollable">
+                       <?php $a = 0; ?>
+
+                        {{--  here the orders list start  --}}
+                        @if(count($orders) > 0 )
+
+                        @foreach($orders as $od)
+                        <?php $a = $a+1; ?>
+
+                        @if($a < 4)
+                        <div class="d-flex flex-row comment-row">
+                                <div class="p-2"><img src="assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle"></div>
+                                <div class="comment-text active w-100">
+                                    <h6 class="font-medium">{{$od->username}} </br></br> Mobile {{$od->phone}}</h6>  <a href="orders/{{$od->order_id}}/edit" class="float-right">Update</a>  
+                                    <span class="m-b-15 d-block">Booked <h3> {{$od -> service}}</h3>
+                                         that will be held on {{$od -> ocdate}}
+                                      
+                                        </span>
+                                   
+                                    <div class="comment-footer">
+                                        <span class="text-muted float-right">Received on {{$od -> created_at}}</span> 
+                                        
+                                          
+                        
+                        {!! Form::open(['method' => 'DELETE', 'action' => ['OrdersController@destroy',$od->order_id],'class' => 'pull-right']) !!}
+                        
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                        
+                        
+                        {!! Form::close() !!}
+                                    </div>
+                                </div>
                             </div>
-                            <ul class="list-style-none">
-                                <li class="card-body">
-                                    <a href="#" class="m-b-0 p-0">
-                                        <div class="d-flex no-block">
-                                            <i class="fa fa-check-circle w-30px m-t-5"></i>
-                                            <div>
-                                                <span class="font-bold">Themeforest</span> Approved My college <span class="font-bold">1 user</span>
-                                                <span>2 Hours Ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="card-body border-top">
-                                    <a href="#" class="m-b-0 p-0">
-                                        <div class="d-flex no-block">
-                                            <i class="fa fa-gift w-30px m-t-5"></i>
-                                            <div>
-                                                <span class="font-bold">My College is PSD Template</span> Theme
-                                                <span>2 Months Ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="card-body border-top">
-                                    <a href="#" class="m-b-0 p-0">
-                                        <div class="d-flex no-block">
-                                            <i class="fa fa-plus w-30px m-t-5"></i>
-                                            <div>
-                                                <span class="font-bold">Lorem ipsum doler set</span> adadas 
-                                                <span>21 Days Ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="card-body border-top">
-                                    <a href="#" class="m-b-0 p-0">
-                                        <div class="d-flex no-block">
-                                            <i class="fa fa-leaf w-30px m-t-5"></i>
-                                            <div>
-                                                <span class="font-bold">ITs my first admin</span> so very excited. 
-                                                <span>20 Days Ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="card-body border-top">
-                                    <a href="#" class="m-b-0 p-0">
-                                        <div class="d-flex no-block">
-                                            <i class="fa fa-user w-30px m-t-5"></i>
-                                            <div>
-                                                <span class="font-bold"> I am alwayse here </span>you have any question
-                                                <span>12 Days Ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                 
-     
-                       </div>
+                            @endif
+
+                        @endforeach
+                        @endif
+                      
+                        {{--  end of the orders list  --}}
+                     
+                      
+                    </div>
+                </div>
+            </div>
+
+               </div>
+  
           
             <footer class="footer text-center">
                 <p>PHOTOSHOOT ADMIN CMS</p>

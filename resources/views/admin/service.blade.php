@@ -15,7 +15,7 @@
             </div>
           </div>
         </div>
-
+    </section>
  
 
   <section class="section">
@@ -35,8 +35,8 @@
               <p>Beatae quasi, totam officiis iste cum eaque maiores voluptatum qui eligendi doloribus pariatur explicabo expedita ullam, veritatis, eos libero numquam maxime cupiditate commodi repellat, illo provident! Quisquam rerum laudantium excepturi!</p>
              
             
-              <p class="mb-5"><img src="{{URL::asset($services->imagepath)}}" alt="" class="img-fluid"></p>
-               <a href="index.blade.php" class="btn btn-primary"> BOOK NOW</a>
+              <p class="mb-5"><img src="{{URL::asset('storage/CoverImages/'.$services->imagepath)}}" alt="" class="img-fluid"></p>
+               <a href="/booking" class="btn btn-primary"> BOOK NOW</a>
           </div>
           </div>
 

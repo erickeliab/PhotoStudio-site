@@ -62,7 +62,7 @@
                         <div class="col-md-12 form-group">
                 {{--  BEGINING OF THE FORM  --}}
 
-           {!! Form::open(['method' => 'post', 'action' => ['ServicesController@store']]) !!}
+           {!! Form::open(['method' => 'post', 'action' => ['ServicesController@store'], 'enctype' => 'multipart/form-data']) !!}
            <div class="row">
              <div class="col-md-6 container">
                   
@@ -84,7 +84,9 @@
                </div>
                <div class="col-md-6 form-group">
                     {{Form::hidden('path','assets/images/big/img1.jpg', ['class' => 'form-control' , 'placeholder' => 'GH'])}}
-
+                    
+                    {!! Form::file('CoverImage') !!}
+                    
                        {!! Form::submit('ADD SERVICE', ['class' => 'btn btn-primary']) !!}
                 </div>
              </div>
