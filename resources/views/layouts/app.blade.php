@@ -41,12 +41,18 @@
     <!-- Theme Style -->
     <link rel="stylesheet" href="{{url('css/style.css')}}">
 </head>
-<body>
-    <div id="app">
+<body class="bg-dark">
+    <div style="margin-top: 60px;" class="bg-dark">
          @include('inc.publicnav')
-        <main class="py-4">
+        <main class="well container bg-dark">
+            <br><br><br>
             @yield('content')
         </main>
     </div>
+    <script src="{{url('js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{url('js/popper.min.js')}}"></script>
+    <script src="{{url('js/bootstrap.min.js')}}"></script>
+
+    
 </body>
 </html>

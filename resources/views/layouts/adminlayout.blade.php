@@ -14,10 +14,15 @@
     <!-- Custom CSS -->
     <link href="{{ URL::asset('assets/libs/flot/css/float-chart.css') }}"rel="stylesheet">
     <!-- Custom CSS -->
+    
+    
     <link href="{{ URL::asset('dist/css/style.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
 
-     
+     {{--  bhbjhvjhv  --}}
+
+    <link rel="stylesheet" href="{{url('fonts/fontawesome/css/font-awesome.min.css')}}">
+
    
 </head>
 

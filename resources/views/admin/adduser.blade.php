@@ -69,9 +69,7 @@
                                           
                                             {!! Form::open(['method' => 'post', 'action' => ['UsersController@store'],'enctype'=>'multipart/form-data']) !!}
 
-                                            <div class="well container  col-md-12" style="padding-top:6px; margin-top:12px">
-                                                
-                                                </div>
+                                           
                                                         
                                                     <div class="row form-group">
                                                             {!! Form::label('name', '', []) !!}

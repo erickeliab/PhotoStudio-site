@@ -3,6 +3,7 @@
 
     @section('content')
     <section class="home-slider owl-carousel">
+
         @if(count($services) > 0 )
         @foreach ($services as $item)
       <div class="slider-item" style="background-image: url('storage/CoverImages/{{$item->imagepath}}')">
@@ -102,6 +103,7 @@
     
 
     </section>
+   
     <!-- END slider -->
     <?php $i=0; ?>
 
@@ -114,9 +116,26 @@
             @if($i < 5)
 
           <div class="col-md-6 mb-4 mb-lg-0 col-lg-3 text-center">
+            
+            <center>
+                <span class="col-md-6 display-4 text-black d-block mb-4">
+             
+                 
+                    
+                      <img src="storage/CoverImages/{{$item->imagepath}}" alt="" class="img-fluid rounded-circle">
+                    
+                    
+                    </span>
+               
             <h4 class="mb-4 text-primary">{{$item->serv_name}}</h4>
-            <p>{{$item->serv_descr}}</p>
+            <p class="para" style="">
+              <?php
+              $sub = $item->serv_descr;
+              $subs = substr($sub,0,100);
+              echo $subs.'....';  ?></p> 
+            <p><a href="services/{{$item->service_id}}" class="btn btn-primary btn-sm">Read More</a></p>
           </div>
+        </center>
           @endif
          @endforeach
 
@@ -158,14 +177,14 @@
                   <a href="{{URL::asset('/booking')}}" class="btn btn-primary">GO TO THE BOOKING PAGE</a>
                   </center>
                 </div>
-              <span class="back-text-dark" id="formOps"></span>
+           
              
             </div>
           </div>
         </div>
       </div>
      
-{{--    --}}
+
 {{--  {!! Form::label('date', 'Date: ' ) !!}
 <div class="form-group input-group date">
     {!! Form::text('date', null, ['class' => 'form-control']) !!}
@@ -251,75 +270,41 @@
       <div class="container">
         
         <div class="row no-gutters">
-          <div class="col-md-6">
+            <div class="col-md-6">
            
 {{--  HERE GOES THE SQUIRE IMAGES  --}}
+<?php $s=0; ?>
 
-@if (count($services) < 0)
+@if (count($services) > 0)
     
 @foreach ($services as $service)
+<?php $s++; ?>
 
-<div class="col-md-6">
     <div class="sched d-block d-lg-flex">
       <div class="bg-image order-2" style="background-image: url('storage/CoverImages/{{$service->imagepath}}');"></div>
       <div class="text order-1">
         <h3>{{$service->serv_name}}</h3>
-        <p>{{$service->serv_descr}}</p>
-        <a href="#formOps" class="btn btn-primary">Book</a>
+        <p>
+            <?php
+            $sube = $service->serv_descr;
+            $suby = substr($sube,0,50);
+            echo $suby.'....';  ?><a href="services/{{$service->service_id}}" class="">more</a>
+        </p>
+        <a href="{{URL::asset('/booking')}}" class="btn btn-primary">Book</a>
         
       </div>
       
     </div>
+  
+    @if($s % 2 == 0)
+            </div>
+    <div class="col-md-6">
+    @endif
+    
 @endforeach
 
 
-@else
-<div class="sched d-block d-lg-flex">
-    <div class="bg-image order-2" style="background-image: url('img/dishes_4.jpg');"></div>
-    <div class="text order-1">
-      <h3>Hollydays</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
-      <a href="#formOps" class="btn btn-primary">Book</a>
-    </div>
-    
-  </div>
 
-  <div class="sched d-block d-lg-flex">
-    <div class="bg-image" style="background-image: url('img/dishes_1.jpg');"></div>
-    <div class="text">
-      <h3>Annivesary</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
-      <a href="#formOps" class="btn btn-primary">Book</a>
-      
-    </div>
-    
-  </div>
-
-</div>
-<div class="col-md-6">
-    <div class="sched d-block d-lg-flex">
-      <div class="bg-image order-2" style="background-image: url('img/dishes_2.jpg');"></div>
-      <div class="text order-1">
-        <h3>Kitchen Parties</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
-        <a href="#formOps" class="btn btn-primary">Book</a>
-        
-      </div>
-      
-    </div>
-
-    <div class="sched d-block d-lg-flex">
-      <div class="bg-image" style="background-image: url('img/dishes_3.jpg');"></div>
-      <div class="text">
-        <h3>chool Bash</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto illo delectus...</p>
-        <a href="#formOps" class="btn btn-primary">Book</a>
-        
-      </div>
-      
-    </div>
-
-  </div>
     
 @endif
 
@@ -368,6 +353,32 @@
           </div>
       </div>
      
+  </section>
+  <section>
+      <div class="container">
+          <div class="row">
+            <div class="major-caousel js-carousel-1 owl-carousel">
+                @if (count($services) > 0)
+    
+                @foreach ($services as $service)
+                
+              <div>
+                <div class="media d-block media-custom text-center">
+                  <a href="storage/CoverImages/{{$service->imagepath}}"><img src="storage/CoverImages/{{$service->imagepath}}" alt="Image Placeholder" class="rounded img-fluid"></a>
+                  <div class="media-body">
+                  
+                  </div>
+                </div>
+              </div>
+              @endforeach
+              
+               
+            
+              @endif
+          </div>
+          <!-- END slider -->
+          </div>
+      </div>
   </section>
 
 @endsection

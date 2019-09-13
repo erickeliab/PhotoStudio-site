@@ -26,7 +26,7 @@
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Users</h4>
+                        <h4 class="page-title">Expenditures</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -56,49 +56,27 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-body container">
-                                <h5 class="card-title m-b-0">Registered Users</h5>
-                           
-                                <div class="table-responsive">
-                            <table class="table col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+                            <div class="card-body">
+                                <h5 class="card-title m-b-0">Manage the income split</h5>
+                            </div>
+                            <table class="table">
                                   <thead>
                                     <tr>
                                       
-                                      <th scope="col" class="text-center font-weight-bold">Name</th>
-                                      <th scope="col" class="text-center">Email</th>
+                                      <th scope="col">Name</th>
+                                      <th scope="col">Email and Phone</th>
                                      
-                                      <th scope="col" class="text-center">Phone</th>
-                                      <th scope="col" class="text-center">Action</th>
+                                      <th scope="col"></th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                      @if(count($users)>0)
-                                        @foreach($users as $user)
-                                        <tr>
-                                                <th scope="row" > <a href="users/{{$user->id}}/edit" class="link-item text-dark"><h5 class="text-center">{{$user->name}}</h5></a></th>
-                                              
-                                                <td class="text-center">{{$user->email}}</td>
-                                                
-                                                <td class="text-center"> {{$user->phone}}
-                                                </td>
-                                                                    {!! Form::open(['method' => 'DELETE', 'action' => ['UsersController@destroy',$user->id],'class' => 'pull-right']) !!}
-                                                       
-                                                       <td class="text-center">             {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-fluid']) !!}
-                                                   
-                                                    </td>
-                                            
-                                                        {!! Form::close() !!}
-
-                                               
-                                              </tr>
-                                        @endforeach
-                                             @endif
+                                     
+                                      
                                             
                                     
                                   </tbody>
                             </table>
-                        </div>
-                        </div>
+                   
                         </div>
                     </div>
                 </div>

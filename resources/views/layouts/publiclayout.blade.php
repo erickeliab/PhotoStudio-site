@@ -21,8 +21,25 @@
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="{{url('css/style.css')}}">
+    <script> 
+        console.log('helloworld');
+      function truncedText(Id,maxleght){
+        let selector = document.getElementsByClassName((Id);
+     
+  
+        let text = selector.innerText;
+        if (text.lenght > maxleght){
+          //do stuff
+          text = text.substr(0,maxleght) + '...';
+        }
+        return text;
+      }
+      document.getElementsByClassName('para').innerText = truncedText('para',13);
+   
+         
+      </script>
   </head>
-  <body>
+  <body style="padding-top:70px;">
     
     <!-- navbar -->
     @include('inc.publicnav')
@@ -37,24 +54,24 @@
     
     <footer class="site-footer" role="contentinfo">
       <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-4 mb-5">
+        <div class="row mb-12">
+          <div class="col-md-3 mb-5">
             <h3>About Us</h3>
             <p class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus et dolor blanditiis consequuntur ex voluptates perspiciatis omnis unde minima expedita.</p>
             <ul class="list-unstyled footer-link d-flex footer-social">
               <li><a href="#" class="p-2"><span class="fa fa-twitter"></span></a></li>
               <li><a href="#" class="p-2"><span class="fa fa-facebook"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-linkedin"></span></a></li>
+             
               <li><a href="#" class="p-2"><span class="fa fa-instagram"></span></a></li>
             </ul>
 
           </div>
-          <div class="col-md-5 mb-5">
+          <div class="col-md-3 mb-5">
             <div class="mb-5">
               <h3>Opening Hours</h3>
               <p><strong class="d-block">24/7</strong> Simply, Everyday</p>
-            </div>
-            <div>
+            </div> </div>
+            <div class="col-md-3">
               <h3>Contact Info</h3>
               <ul class="list-unstyled footer-link">
                 <li class="d-block">
@@ -64,27 +81,29 @@
                 <li class="d-block"><span class="d-block">Email:</span><span class="text-white">info@ericktech.com</span></li>
               </ul>
             </div>
-          </div>
+         
           <div class="col-md-3 mb-5">
             <h3>Quick Links</h3>
             <ul class="list-unstyled footer-link">
               <li><a href="{{URL::asset('/about')}}">About</a></li>
              
               <li><a href="{{URL::asset('/contact')}}">Contact</a></li>
+              <li><a href="{{URL::asset('/servicez')}}">Services</a></li>
+             
+              <li><a href="{{URL::asset('/booking')}}">Book Now</a></li>
             </ul>
           </div>
-          <div class="col-md-3">
-          
-          </div>
+         
         </div>
-        <div class="row">
-          <div class="col-12 text-md-center text-left">
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-          </div>
-        </div>
+        
       </div>
+      <div class="row">
+          <div class="col-12 text-md-center text-center">
+            <p>
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
+       </p>
+          </div>
+        </div>
     </footer>
     <!-- END footer -->
 

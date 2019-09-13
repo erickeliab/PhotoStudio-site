@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-md-12 text-center heading-wrap">
               <h2>Services</h2>
-              <span class="back-text">Our Services</span>
+              <span class="back-text">Services</span>
             </div>
           </div>
         </div>

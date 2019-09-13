@@ -44,54 +44,70 @@
                <div class="container">
                     @include('inc.alerts')
                </div>
-                        <div class="row">
-                    <div class="col-md-12">
+
+               <div class="row">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title m-b-0">Booked Orders</h4>
-                            </div>
-                            <div class="comment-widgets scrollable">
-                               
+                            <div class="card-body container">
+                                <center> 
+                                <h5 class="card-title m-b-0">All Orders</h5><br>
+                                </center>
+<div class="table-responsive">
+                            <table class="table col-md-12 col-lg-12 col-xl-12">
+                                  <thead>
+                                    <tr>
+                                      
+                                      <th scope="col" class="text-center font-weight-bold">Order</th>
+                                      <th scope="col" class="text-center">Customer</th>
+                                     
+                                      <th scope="col" class="text-center">Phone</th>
+                                      <th scope="col" class="text-center">Date</th>
+                                      <th scope="col" class="text-center">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                        @if(count($order) > 0 )
 
-                                {{--  here the orders list start  --}}
-                                @if(count($order) > 0 )
-
-                                @foreach($order as $od)
-                                <div class="d-flex flex-row comment-row">
-                                        <div class="p-2"><img src="assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle"></div>
-                                        <div class="comment-text active w-100">
-                                            <h6 class="font-medium">{{$od-> username}}</h6>  <a href="orders/{{$od->order_id}}/edit" class="float-right">Update</a>  
-                                            <span class="m-b-15 d-block">Booked for <h3> {{$od -> service}}</h3>
-                                                 that will be held on {{$od -> ocdate}}
-                                              
-                                                </span>
-                                           
-                                            <div class="comment-footer">
-                                                <span class="text-muted float-right">Received on {{$od -> created_at}}</span> 
+                                        @foreach($order as $od)
+                                        <tr>
+                                                <th scope="row" class="text-center"> <a href="users/{{$od->order_id}}/edit" class="link-item justify-content-center container text-dark"><h5> {{$od->service}} <br>
+                                                <small>received on {{$od->created_at}}</small>
                                                 
-                                                  
-                                
-                                {!! Form::open(['method' => 'DELETE', 'action' => ['OrdersController@destroy',$od->order_id],'class' => 'pull-right']) !!}
-                                
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                
-                                
-                                {!! Form::close() !!}
-                                            </div>
-                                        </div>
-                                    </div>
+                                                </h5></a></th>
+                                              
+                                                <td class="text-center">{{$od->username}}</td>
+                                                
+                                                <td class="text-center"> {{$od->phone}} </td>
 
-                                @endforeach
-                                @endif
-                              
-                                {{--  end of the orders list  --}}
-                             
-                              
-                            </div>
+                                              <td class="text-center">  {{$od->ocdate}} </td>
+
+                                              {!! Form::open(['method' => 'DELETE', 'action' => ['OrdersController@destroy',$od->order_id],'class' => 'pull-right']) !!}
+                                
+                                            <td class="text-center">
+                                                    
+                                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                                    
+                                                    
+                                                    
+                                            </td>
+                                            {!! Form::close() !!}
+                                               
+                                              </tr>
+                                        @endforeach
+                                             @endif
+                                            
+                                    
+                                  </tbody>
+                            </table>
+                        </div>
+                        </div>
                         </div>
                     </div>
-     
-                       </div>
+                </div>
+ 
+                   </div>
+      
+                       
           
             <footer class="footer text-center">
                 <p>PHOTOSHOOT ADMIN CMS</p>

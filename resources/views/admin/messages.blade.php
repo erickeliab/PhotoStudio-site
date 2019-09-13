@@ -58,9 +58,18 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">One third width</h5>
-                                <p>{{$msg -> body}}</p>
-                                <a href="messages/{{$msg->id}}" class="">more</a>
+                                <h5 class="card-title">{{$msg->created_at}}</h5>
+                                <p>
+                                        <?php
+                                        $sube = $msg->body;
+                                        $suby = substr($sube,0,20);
+                                        if($sube > $suby){
+                                            echo $suby.'....'.'<a href="messages/'.$msg->id.'" class="">more</a>';  
+                                        }else echo $sube
+                                        ?>
+                                    
+                                </p>
+                                
                                <hr>
                                <div class="raw"> 
                                   

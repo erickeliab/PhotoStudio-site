@@ -11,6 +11,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{URL::asset('/messages')}}" aria-expanded="false"></i><span class="hide-menu">Messages</span></a></li>
                         @if(Auth::user()->id == 1)
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{URL::asset('/users')}}" aria-expanded="false"><span class="hide-menu">Users</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{URL::asset('/finances')}}" aria-expanded="false"><span class="hide-menu">Finance</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{URL::asset('/expens')}}" aria-expanded="false"><span class="hide-menu">Expenditures</span></a></li>
+
                         @endif
                         <hr>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{URL::asset('services/create')}}" aria-expanded="false"><span class="hide-menu">Add Service</span></a></li>

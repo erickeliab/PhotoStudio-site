@@ -51,65 +51,68 @@
      
                 <hr>
                 <h5>Add Service</h5>
-                <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
+                
+               
                 <div class="container"> @include('inc.alerts')
                     </div>
                     <hr>
-                <div class="container">
-                        <div class="col-md-12 form-group">
-                {{--  BEGINING OF THE FORM  --}}
 
-           {!! Form::open(['method' => 'post', 'action' => ['ServicesController@store'], 'enctype' => 'multipart/form-data']) !!}
-           <div class="row">
-             <div class="col-md-6 container">
-                  
-              <div class="col-md-12 form-group">
-                    {!! Form::label('name', 'Service', []) !!}
-                    {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => 'Service name'])}}
-                  
-               </div>
-               <div class="col-md-12 form-group">
-                   
-                   {!! Form::label('price', 'Price', []) !!}
-                   
-                    {{Form::text('price','', ['class' => 'form-control' , 'placeholder' => 'Price'])}}
-                  
-               </div>
-               <div class="col-md-12 form-group">
-                    {!! Form::label('serv_descr', 'Description', []) !!}
-                    {{Form::textarea('serv_descr','', ['class' => 'form-control' , 'placeholder' => 'Service Description'])}}
-               </div>
-               <div class="col-md-6 form-group">
-                    {{Form::hidden('path','assets/images/big/img1.jpg', ['class' => 'form-control' , 'placeholder' => 'GH'])}}
-                    
-                    {!! Form::file('CoverImage') !!}
-                    
-                       {!! Form::submit('ADD SERVICE', ['class' => 'btn btn-primary']) !!}
-                </div>
-             </div>
+                    <div class="card container">
+                            <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <div class="card">
+                                            
+                            
+                                           <div class="well container">
+                                            <div class="container" style="padding:20px;">
+                                                
 
-             <div class="col-md-6 container">
-                  
-                   
-                    <p class="mb-5"><img src="{{URL::asset('assets/images/big/img1.jpg')}}" alt="" class="img-fluid"></p>
-                             
-                                   
-                        
-                   </div>
-           </div>
-              
+                                           {!! Form::open(['method' => 'post', 'action' => ['ServicesController@store'], 'enctype' => 'multipart/form-data']) !!}
+                                           
+                                            
+                                                  
+                                           <div class="row form-group">
+                                                 {!! Form::label('name', 'Service', []) !!}
+                                                 {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => 'Service name'])}}
+                                               
+                                            </div>
+                                            <div class="row form-group">
+                                                
+                                                {!! Form::label('price', 'Price', []) !!}
+                                                
+                                                 {{Form::text('price','', ['class' => 'form-control' , 'placeholder' => 'Price'])}}
+                                               
+                                            </div>
+                                            <div class="row form-group">
+                                                 {!! Form::label('serv_descr', 'Description', []) !!}
+                                                 {{Form::textarea('serv_descr','', ['class' => 'form-control' , 'placeholder' => 'Service Description'])}}
+                                            </div>
+                                            <div class="row form-group">
+                                                 {{Form::hidden('path','assets/images/big/img1.jpg', ['class' => 'form-control' , 'placeholder' => 'GH'])}}
+                                                 <br> <center>
+                                                 {!! Form::file('CoverImage') !!}
+                                                
+                                                 
+                                                 </center>
+                                                    {!! Form::submit('ADD SERVICE', ['class' => 'btn btn-primary']) !!}
+                                             </div>
+                                             
+                                             {!! Form::close() !!}
+                                             
+                                          </div>
+                                            </div>
+                                                {{--  BEGINING OF THE FORM  --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                      
+                                        
 
-              
 
-           {{--  EBD OF THE FORM  --}}
-                    
-               </div>
-                </div>     
-                       </div>
-          
+                                       
+                                          
+ 
             <footer class="footer text-center">
                 <p>PHOTOSHOOT ADMIN CMS</p>
             </footer>

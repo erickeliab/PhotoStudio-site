@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-md-12 text-center heading-wrap">
               <h2>About</h2>
-              <span class="back-text">About Us</span>
+              <span class="back-text">About</span>
             </div>
           </div>
         </div>

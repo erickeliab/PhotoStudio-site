@@ -56,6 +56,9 @@
 
         Route::resource('services', 'ServicesController');
 
+        Route::resource('expens', 'ExpensController');
+
+        Route::resource('finances', 'FinanceController');
 
 
         Auth::routes();

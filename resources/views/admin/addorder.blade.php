@@ -58,13 +58,18 @@
                 <div class="container"> @include('inc.alerts')
                     </div>
                     <hr>
-                <div class="container">
-                        <div class="col-md-12 form-group ">
+                    <div class="card container">
+                            <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <div class="card">
+                                            
+                            
+                                           <div class="well container" style="padding:20px;">
                 {{--  BEGINING OF THE FORM  --}}
 
            {!! Form::open(['method' => 'post', 'action' => ['OrdersController@store']]) !!}
            <div class="row well">
-             <div class="col-md-6 container">
+           
                   
               <div class="col-md-12 form-group">
                     {!! Form::label('name', 'Name of the customer', []) !!}
@@ -91,35 +96,25 @@
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                      </div>
                     </div>
-                </div>
-              
-                <div class="col-md-12 form-group">
-                        {!! Form::label('service', 'Service', []) !!}
-                        {!! Form::select('service', ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'], 'G') !!}
-                      
-                   </div>
                
              
-               <div class="col-md-6 form-group">
-                   
+                <div class="col-md-12 form-group ">
+                    <br>
+                        {!! Form::label('service', 'Service', []) !!} <br>
+                        {!! Form::select('service', ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'], 'G', ['class' => 'btn well col-md-6 bg-secondary text-white']) !!}
+                </div><br><hr>
+                        <div class="col-md-12 form-group ">
+                        <center>
 
                        {!! Form::submit('ADD ORDER', ['class' => 'btn btn-primary']) !!}
+                       <center>
+                           
+                           {!! Form::close() !!}
+                           
                 </div>
              </div>
 
-             <div class="col-md-6 container">
-                  
-                   
-                    {{-- <p class="mb-5"><img src="{{URL::asset('assets/images/big/img1.jpg')}}" alt="" 'class'=>"img-fluid"></p> --}}
-                             
-                                   
-                        
-                  
-                </div>
-           </div>
-     
-           {{--  EBD OF THE FORM  --}}
-                    
+      
                </div>
                 </div>     
                        </div>
