@@ -82,7 +82,7 @@
                                           
                                 {!! Form::open(['method' => 'DELETE', 'action' => ['ServicesController@destroy',$service->service_id],'class' => 'pull-right']) !!}
                                 
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-rounded']) !!}
                                 
                                 
                                 {!! Form::close() !!}

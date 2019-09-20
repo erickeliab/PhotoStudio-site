@@ -11,7 +11,7 @@ $usr = User::all();
 
 ?>
 
-@if(Auth::user()->id == 1)
+@if(Auth::user()->Authority == 'admin')
 <div class="container-fluid">
                
         <div class="row">

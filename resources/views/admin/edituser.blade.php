@@ -50,7 +50,7 @@
                 
                 <h5>Add New User</h5>
      <hr>
-                
+                <div> @include('inc.alerts')</div>
                 <div class="card container">
                         <div class="row justify-content-center">
                                 <div class="col-md-8">
@@ -71,6 +71,18 @@
                                                           
                                                        </div>
                                                        <div class="row form-group">
+                                                            {!! Form::label('Authority', 'Authority', []) !!} <br>
+                                                            {!! Form::select('Authority', ['M' => 'member', 'A' => 'admin'], 'M',['class' => 'text-center col-md-12 col-lg-12 col-sm-12']) !!}
+                                                          
+                                                       </div>
+                                                       <div class="row form-group">
+                                                        
+                                                            {!! Form::label('phone', 'phone', []) !!}
+                                                            
+                                                             {{Form::text('phone','', ['class' => 'form-control' , 'placeholder' => $user->phone])}}
+                                                           
+                                                        </div>
+                                                       <div class="row form-group">
                                                         
                                                             {!! Form::label('email', 'email', []) !!}
                                                             
@@ -78,13 +90,7 @@
                                                            
                                                         </div>
 
-                                                        <div class="row form-group">
-                                                        
-                                                                {!! Form::label('phone', 'phone', []) !!}
-                                                                
-                                                                 {{Form::text('phone','', ['class' => 'form-control' , 'placeholder' => $user->phone])}}
-                                                               
-                                                            </div>
+                                                       
                                                        <div class="row form-group">
                                                                 {!! Form::label('password', 'Password', []) !!}
                                                                 
@@ -103,12 +109,13 @@
                                                             
                                                         </div>
 
-                                                        <div class="col-md-6 form-group  align-items-center ">
+                                                        <div class="col-md-12 form-group  align-items-center ">
                                                             
-                                                            {!! Form::file('CoverImage') !!}
+                                                            {!! Form::file('CoverImage',['class' => 'bnt btn-block']) !!}
                                                             
                                                            <center>
-                                                                {!! Form::submit('Add User', ['class' => 'btn btn-primary']) !!}
+                                                                {{Form::hidden('_method','PUT')}}
+                                                                {!! Form::submit('Update', ['class' => 'btn btn-rounded btn-primary']) !!}
 
                                                            </center>
                                      

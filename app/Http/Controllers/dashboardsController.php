@@ -25,6 +25,7 @@ class dashboardsController extends Controller
     public function index()
     {
         $oder = Order::orderBy('created_at', 'desc')->take(5)->get();
+        
         return view('admin.dashboard')->with('orders',$oder);
     }
 }

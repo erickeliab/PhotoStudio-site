@@ -32,9 +32,113 @@
    </style>
 </head>
 
-<body>
+<body class="bg-secondary">
 
-   @yield('content')
+ <main class="container bg-white">
+     <div class='row col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12' id="top">
+<div class="col-md-3">
+        <div class="media d-block media-custom text-center">
+                <a href="adoption-single.html"><img src="{{URL::asset('storage/CoverImages/logoo1.png')}}" alt="Image Placeholder" class="img-fluid thumbnail img-rounded"></a>
+               
+              </div>
+</div>
+<div class="col-md-9 container"><div class="col-md-6"><br><br> <a href="{{URL::asset('/dashboards')}}" class="btn btn-secondary btn-block btn-rounded"><h2>Dashboard</h2></a> 
+    <a href="{{URL::asset('/reports')}}" class="btn btn-secondary btn-block btn-rounded"><h2>New Report</h2></a> 
+    <a href="{{URL::asset('/reports/create')}}" class="btn btn-secondary btn-block btn-rounded" download><h2>Download PDF</h2></a> </div>
+    <span class="col-md-3 float-right"><h2><?php echo date('d/m/y') ?></h2></span></div>
+     </div>
+     <hr>
+     <small><i>summary</i></small>
+     
+     <div class='container col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12' id="header"> @include('inc.board')</div>
+     <center><span class="text-secondary">Report from <i>{{$datas['datefrom']}}</i> &nbsp to <i>{{$datas['dateto']}}</i> </span></center>
+     <div class='container col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12' id="table">
+            <div class="table-responsive">
+                    <table class="table table-hover col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+                          <thead>
+                            <tr>
+                              
+                              <th scope="col" class="text-lrft font-weight-bold">Category</th>
+                             
+                              <th scope="col" class="text-left">No</th>
+                              <th scope="col" class="text-left">Value(Tsh)</th>
+                           
+                            </tr>
+                          </thead>      
+                          <tbody>
+                              <tr>
+                                  <td class="center">All Orders</td>
+                                  <td class="center" id="customer">{{$datas['allorders']}}</td>
+                                  <td class="center" id="created_at">{{$datas['allordervalue']}}</td>
+                               
+                              </tr>
+                              <tr>
+                                    <td class="center">Approved</td>
+                                    <td class="center" id="service">{{$datas['aprovednum']}}</td>
+                                    <td class="center" id="created_at">{{$datas['aprovedvalue']}}</td>
+                                </tr>
+                                <tr>
+                                        <td class="center">Not Approved</td>
+                                        <td class="center" id="phone">{{$datas['nonaprovednum']}}</td>
+                                        <td class="center" id="created_at">{{$datas['nonaprovedvalue']}}</td>
+                                    </tr>
+                                    <tr>
+                                            <td class="center">Services</td>
+                                            <td class="center" id="ocdate">{{$datas['allservices']}}</td>
+                                            <td class="center" id="created_at">{{$datas['servicesvalue']}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td class="center">Full Paid</td>
+                                                <td class="center " id='price'> {{$datas['numpaid']}}</td>
+                                                <td class="center" id="created_at">{{$datas['paidfullyprice']}}</td>
+                                            </tr>
+                                            <tr>
+                                                    <td class="center">Partial</td>
+                                                    <td class="center " id='paid'>{{$datas['numpartial']}}</td>
+                                                    <td class="center" id="created_at">{{$datas['paidpartialprice']}}</td>
+                                                </tr>
+                                            <tr>
+                                                    <td class="center">Remain</td>
+                                                    <td class="center" id="remain">{{$datas['numpartial']}}</td>
+                                                    <td class="center" id="created_at">{{$datas['partialremain']}}</td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="center">Expens</td>
+                                                        <td class="center" id="status">{{$datas['numexp']}}</td>
+                                                        <td class="center" id="created_at">{{$datas['expvalue']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td class="center">Messages</td>
+                                                            <td class="center" id="status">{{$datas['allmsgs']}}</td>
+                                                            <td class="center" id="created_at"></td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td class="center">Total income</td>
+                                                                <td class="center" id="status"></td>
+                                                                <td class="center" id="created_at">{{$datas['income']}}</td>
+                                                            </tr>
+                                            <tr>
+                                                    <td class="center">Net Profit</td>
+                                                    <td class="center" id="created_at"></td>
+                                                    <td class="center" id="created_at">{{$datas['profit']}}</td>
+                                                </tr>
+                          </tbody>
+                    </table>
+                </div>
+     </div>
+     <div class='container col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12' id="footer"></div>
+
+
+
+
+
+
+
+
+
+
+
+ </main>
    
    <!-- BEGIN MODAL -->
    <div class="modal none-border" id="my-event">
@@ -62,59 +166,7 @@
                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                </div>
                <div class="modal-body">
-                       <div class="table-responsive">
-                               <table class="table table-hover col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
-                                     <thead>
-                                       <tr>
-                                         
-                                         <th scope="col" class="text-center font-weight-bold">No</th>
-                                        
-                                        
-                                         <th scope="col" class="text-center">Value</th>
-                                      
-                                       </tr>
-                                     </thead>
-                                     <tbody>
-                                         <tr>
-                                             <td class="center">Customer</td>
-                                             <td class="center" id="customer"></td>
-                                          
-                                         </tr>
-                                         <tr>
-                                               <td class="center">Service</td>
-                                               <td class="center" id="service"></td>
-                                           </tr>
-                                           <tr>
-                                                   <td class="center">Phone</td>
-                                                   <td class="center" id="phone"></td>
-                                               </tr>
-                                               <tr>
-                                                       <td class="center">Date of the event</td>
-                                                       <td class="center" id="ocdate"></td>
-                                                   </tr>
-                                                   <tr>
-                                                           <td class="center">Price</td>
-                                                           <td class="center " id='price'></td>
-                                                       </tr>
-                                                       <tr>
-                                                               <td class="center">Paid</td>
-                                                               <td class="center " id='paid'></td>
-                                                           </tr>
-                                                       <tr>
-                                                               <td class="center">Remain</td>
-                                                               <td class="center" id="remain"></td>
-                                                           </tr>
-                                                           <tr>
-                                                                   <td class="center">Stutus</td>
-                                                                   <td class="center" id="status"></td>
-                                                               </tr>
-                                                       <tr>
-                                                               <td class="center">Received</td>
-                                                               <td class="center" id="created_at"></td>
-                                                           </tr>
-                                     </tbody>
-                               </table>
-                           </div>
+                     
                </div>
                <div class="modal-footer">
                  

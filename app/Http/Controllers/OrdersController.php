@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Service;
 
 class OrdersController extends Controller
 {
@@ -65,13 +66,22 @@ class OrdersController extends Controller
         $order -> phone = $request -> input('phone');
         
         $initdate = $request -> input('date');
-        $data = ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'];
+        $data =[];
+
+        $details = Service::all();
+        //creating an array of data with the services key and value from the services table
+            foreach($details as $detail){
+               $data[$detail->serv_key] = $detail->serv_name;
+            }
+
        $serv = $request -> input('service');
         $newdt = date("Y-m-d",strtotime($initdate));
         $order -> ocdate = $newdt;
         $order -> service = $data[$serv];
-          $order -> save();
-
+        $servdata = Service::where('serv_name',$data[$serv])->get();
+        $order -> service_id = $servdata[0]->service_id;
+        $order -> save();
+        
         return redirect('/orders')->with('success','you have successful added an order');
     }
 
@@ -113,10 +123,41 @@ class OrdersController extends Controller
         $order = Order::find($id);
         $order -> username = $request -> input('name');
         $order -> phone = $request -> input('phone');
-        
-        $initdate = $request -> input('date');
-        $data = ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'];
-       $serv = $request -> input('service');
+       
+        if($request -> input('paid')){
+
+            $order -> paid = $request -> input('paid');
+              
+            $initdate = $request -> input('date');
+            $data =[];
+    
+            $details = Service::all();
+            //creating an array of data with the services key and value from the services table
+                foreach($details as $detail){
+                   $data[$detail->serv_key] = $detail->serv_name;
+                }
+                
+            $serv = $request -> input('service');
+            $newdt = date("Y-m-d",strtotime($initdate));
+            $order -> ocdate = $newdt;
+            $order -> service = $data[$serv];
+              $order -> save();
+            return redirect('/finances')->with('success','You have successfully updated an order');
+        }else 
+            
+            $order -> paid = 0.00;
+
+
+                $initdate = $request -> input('date');
+        $data =[];
+
+        $details = Service::all();
+        //creating an array of data with the services key and value from the services table
+            foreach($details as $detail){
+               $data[$detail->serv_key] = $detail->serv_name;
+            }
+            
+        $serv = $request -> input('service');
         $newdt = date("Y-m-d",strtotime($initdate));
         $order -> ocdate = $newdt;
         $order -> service = $data[$serv];
@@ -132,9 +173,11 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
+        
         $odr = Order::find($id);
-        $odr -> delete();
-
-        return redirect('/orders')->with('success','order successfully deleted');
+        $var = ($odr->approved) ? 'disaproved' : 'approved';
+        $odr->approved = !$odr->approved;
+        $odr->save();
+        return redirect('/orders')->with('success','order successfully '.$var);
     }
 }

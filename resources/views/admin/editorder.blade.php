@@ -29,7 +29,7 @@
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{URL::asset('/')}}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Log Out</li>
                                 </ol>
                             </nav>
@@ -48,11 +48,16 @@
                 <div class="container"> @include('inc.alerts')
                     </div>
                     <hr>
-                <div class="container">
-                        <div class="col-md-12 form-group ">
+                    <div class="card container">
+                            <div class="row justify-content-center">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            
+                            
+                                        <div class="well container" style="padding:20px;">
                 {{--  BEGINING OF THE FORM  --}}
 
-           {!! Form::open(['method' => 'post', 'action' => ['OrdersController@update',$od->order_id]]) !!}
+           {!! Form::open(['method' => 'post', 'action' => ['OrdersController@update',$od->order_id], "class"=>"col-md-12"]) !!}
            <div class="row well">
              <div class="col-md-6 container">
                   
@@ -82,38 +87,54 @@
                      </div>
                     </div>
                 </div>
+                <?php 
+                //importing the Service model 
+                use App\Service;
+                $a = [];
+                $records = Service::all();
+                $svc = array();
+                foreach($records as $record){
+                    //create key 
+                 $key = $record->serv_key;
+                 $value = $record->serv_name;
+ 
+                 $a[$key] = $value;
+                  
+                }
+                ?>
               
                 <div class="col-md-12 form-group">
-                        {!! Form::label('service', 'Service', []) !!}
-                        {!! Form::select('service', ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'], null) !!}
+                        {!! Form::label('service', 'Service', []) !!} <br>
+                        {!! Form::select('service', $a, null,['class' => 'text-center col-md-12 col-lg-12 col-sm-12']) !!}
                       
                    </div>
-               
+                 
+                   @if(Auth::user()->id == 1)
+                   <div class="col-md-12 form-group">
+                   
+                        {!! Form::label('paid', 'paid', []) !!}
+                        
+                         {{Form::text('paid',$od->paid, ['class' => 'form-control' , 'placeholder' => 'paid'])}}
+                       
+                    </div>
+                    @endif
              
-               <div class="col-md-6 form-group">
+               <div class="col-md-12 form-group">
                     {{Form::hidden('_method','PUT')}}
                   
-
-                       {!! Form::submit('UPDATE', ['class' => 'btn btn-primary']) !!}
-                </div>
-             </div>
-
-             <div class="col-md-6 container">
-                  
-                   
-                    {{-- <p class="mb-5"><img src="{{URL::asset('assets/images/big/img1.jpg')}}" alt="" 'class'=>"img-fluid"></p> --}}
-                             
-                                   
-                        
-                  
-                </div>
-           </div>
-     
-           {{--  EBD OF THE FORM  --}}
+                    <center>
+                       {!! Form::submit('UPDATE', ['class' => 'btn btn-primary btn-rounded']) !!} </center>
+                    </div>
                     
-               </div>
+                    {!! Form::close() !!}
+                    
+                </div>
+    
+    
+                </div>
                 </div>     
-                       </div>
+                </div>
+    
           
             <footer class="footer text-center">
                 <p>PHOTOSHOOT ADMIN CMS</p>
@@ -133,3 +154,4 @@
     </div>
   @endsection  
     
+       

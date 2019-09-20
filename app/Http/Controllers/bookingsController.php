@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Service;
 
 class bookingsController extends Controller
 {
@@ -21,11 +22,20 @@ class bookingsController extends Controller
         $order -> phone = $request -> input('phone');
         
         $initdate = $request -> input('date');
-        $data = ['B'=>'Birthdays','G'=>'Graduations','A'=>'Anniversary','S'=>'Baby Shower','E'=>'Engagement','S'=>'Suprises','H'=>'Holydays'];
-       $serv = $request -> input('service');
+        $data =[];
+
+        $details = Service::all();
+        //creating an array of data with the services key and value from the services table
+            foreach($details as $detail){
+               $data[$detail->serv_key] = $detail->serv_name;
+            }
+            
+            $serv = $request -> input('service');
         $newdt = date("Y-m-d",strtotime($initdate));
         $order -> ocdate = $newdt;
         $order -> service = $data[$serv];
+        $servdata = Service::where('serv_name',$data[$serv])->get();
+        $order -> service_id = $servdata[0]->service_id;
           $order -> save();
 
         return redirect('/booking')->with('success','you have successful added an order');

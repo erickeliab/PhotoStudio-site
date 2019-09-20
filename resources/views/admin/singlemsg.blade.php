@@ -57,7 +57,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">One third width</h5>
+                                <h5 class="card-title">From: {{$msg->sender}}</h5>
                                 <p>{{$msg -> body}}</p>
                                 
                                <hr>

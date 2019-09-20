@@ -54,8 +54,8 @@
                         <center> 
                         <h5 class="card-title m-b-0">Recent Orders</h5><br>
                         </center>
-
-                    <table class="table col-md-12 col-lg-12 col-xl-12">
+                        <div class="table-responsive">
+                    <table class="table table-hover col-md-12 col-lg-12 col-xl-12">
                           <thead>
                             <tr>
                               
@@ -63,6 +63,7 @@
                               <th scope="col" class="text-center">Customer</th>
                              
                               <th scope="col" class="text-center">Phone</th>
+                              <th scope="col" class="text-center">Details</th>
                               <th scope="col" class="text-center">Date</th>
                               <th scope="col" class="text-center">Action</th>
                             </tr>
@@ -74,27 +75,40 @@
                                 <?php $a++; ?>
                                 @if($a < 4)
                                 <tr>
-                                        <th scope="row" class="text-center"> <a href="users/{{$od->order_id}}/edit" class="link-item justify-content-center container text-dark"><h5> {{$od->service}} <br>
+                                        <th scope="row" class="text-center"> <a href="orders/{{$od->order_id}}/edit" class="link-item justify-content-center container text-dark"><h5> {{$od->service}} <br>
                                         <small>received on {{$od->created_at}}</small>
                                         
                                         </h5></a></th>
                                       
                                         <td class="text-center">{{$od->username}}</td>
                                         
-                                        <td class="text-center"> {{$od->phone}} </td>
+                                        <td class="text-center"> {{$od->phone}} </td> 
+
+                                        <td> <a href="javascript:void(0)" onclick="parseId({{$od->order_id}}, '{{$od->phone}}', '{{$od->username}}' ,'{{$od->service}}', {{$od->services->price}},{{$od->paid}},'{{$od->ocdate}}','{{$od->created_at}}' );" data-toggle="modal" data-target="#add-new-event" style=";" class="btn btn-secondary btn-rounded waves-effect waves-light">
+                                                </i> View File</a></td> 
 
                                       <td class="text-center">  {{$od->ocdate}} </td>
 
-                                      {!! Form::open(['method' => 'DELETE', 'action' => ['OrdersController@destroy',$od->order_id],'class' => 'pull-right']) !!}
+                                                <td>
+
+                                {!! Form::open(['method' => 'DELETE', 'action' => ['OrdersController@destroy',$od->order_id],'class' => 'pull-right','id' => 'frm']) !!}
+
+                             
+                                <td class="text-center">
+                                        @if($od->approved)
+                                        {!! Form::submit('Disaprove', ['class' => 'btn btn-danger btn-rounded']) !!}
+                                        @else 
+                                        {!! Form::submit('Aproove', ['class' => 'btn btn-success btn-rounded']) !!}
+                                        @endif
+                                        
+                                        
+                                </td>
+                               
+                               
                         
-                                    <td class="text-center">
-                                            
-                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                            
-                                            
-                                            
-                                    </td>
-                                    {!! Form::close() !!}
+                        {!! Form::close() !!}
+                                                </td>
+                                   
                                        
                                       </tr>
                                       @endif
@@ -104,6 +118,7 @@
                             
                           </tbody>
                     </table>
+                        </div>
                 </div>
                 </div>
             </div>
@@ -121,6 +136,6 @@
       
     </div>
     
-   
+    
 @endsection
 

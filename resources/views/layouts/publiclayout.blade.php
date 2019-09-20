@@ -52,18 +52,13 @@
    
     @yield('content')
     
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer" role="contentinfo" style="padding-bottom:-20;">
       <div class="container">
         <div class="row mb-12">
           <div class="col-md-3 mb-5">
             <h3>About Us</h3>
             <p class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus et dolor blanditiis consequuntur ex voluptates perspiciatis omnis unde minima expedita.</p>
-            <ul class="list-unstyled footer-link d-flex footer-social">
-              <li><a href="#" class="p-2"><span class="fa fa-twitter"></span></a></li>
-              <li><a href="#" class="p-2"><span class="fa fa-facebook"></span></a></li>
-             
-              <li><a href="#" class="p-2"><span class="fa fa-instagram"></span></a></li>
-            </ul>
+         
 
           </div>
           <div class="col-md-3 mb-5">

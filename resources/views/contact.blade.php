@@ -27,7 +27,7 @@
           <div class="row">
             <div class="col-md-12 text-center heading-wrap">
               <h2>Contact Us</h2>
-              <span class="back-text">Contact Form</span>
+            
             </div>
           </div>
         </div>
@@ -42,12 +42,12 @@
            <div class="row">
              <div class="col-md-6 form-group">
                   
-                   {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => 'Your name'])}}
+                   {{Form::text('sender','', ['class' => 'form-control' , 'placeholder' => 'Your name', 'style' => ' border-radius:30px;'])}}
              </div>
            
              <div class="col-md-6 form-group">
                   
-                   {{Form::text('phone','', ['class' => 'form-control' , 'placeholder' => 'Your Phone'])}}
+                   {{Form::text('phon','', ['class' => 'form-control' , 'placeholder' => 'Your Phone'])}}
                 </div>
                 </div>
         

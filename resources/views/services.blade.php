@@ -1,23 +1,26 @@
 
+  
+
+
     @extends('layouts.publiclayout')
 
     @section('content')
 
+  
     <section class="section element-animate">
       <div class="clearfix mb-5 pb-5">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 text-center heading-wrap">
               <h2>Services</h2>
-              <span class="back-text">Services</span>
+              
             </div>
           </div>
         </div>
       </div>
 
-    </section>
-    <section class="section element-animate">
-      
+
+
       <div class="container">
         <div class="row">
 

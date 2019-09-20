@@ -60,6 +60,7 @@
 
         Route::resource('finances', 'FinanceController');
 
+        Route::resource('reports', 'ReportsController');
 
         Auth::routes();
 

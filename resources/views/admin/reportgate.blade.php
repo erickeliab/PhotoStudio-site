@@ -46,17 +46,23 @@
                     </div>
                 </div>
             </div>
+           <?php //$words = ''; ?>
            
-            
             @include('inc.board')
                 <hr>
-                <h5>Add Order</h5>
+                <h5>Generate Report</h5>
                 <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <div class="container"> @include('inc.alerts')
+                <div class="container">
+                     @include('inc.alerts')
                     </div>
+                    @if(session('words'))
+
+                    <div class="alert alert-danger">{{ session('words')}}</div>
+
+                    @endif
                     <hr>
                     <div class="card container">
                             <div class="row justify-content-center">
@@ -66,28 +72,26 @@
                             
                                            <div class="well container" style="padding:20px;">
                 {{--  BEGINING OF THE FORM  --}}
-
-           {!! Form::open(['method' => 'post', 'action' => ['OrdersController@store']]) !!}
+                <center><h1>REPORT</h1></center>
+           {!! Form::open(['method' => 'post', 'action' => ['ReportsController@store']]) !!}
            <div class="row well">
            
-                  
-              <div class="col-md-12 form-group">
-                    {!! Form::label('name', 'Name of the customer', []) !!}
-                    {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => 'name'])}}
-                  
-               </div>
-               
+            
                
                 
                <div class="col-md-12 form-group">
                    
-                   {!! Form::label('phone', 'phone', []) !!}
-                   
-                    {{Form::text('phone','', ['class' => 'form-control' , 'placeholder' => 'phone'])}}
-                  
+                    {!! Form::label('initdate', 'From', []) !!}
+                    <div class="input-group">
+                            {{Form::text('initdate','', ['class' => 'form-control mydatepicker' , 'placeholder' => 'mm/dd/yyyy'])}}
+
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
                </div>
                <div class="col-md-12 form-group">
-                    {!! Form::label('date', 'Date', []) !!}
+                    {!! Form::label('date', 'To', []) !!}
                     <div class="input-group">
                     
                     
@@ -96,40 +100,21 @@
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                      </div>
                     </div>
-               <?php 
-               //importing the Service model 
-               use App\Service;
-               $a = [];
-               $records = Service::all();
-               $svc = array();
-               foreach($records as $record){
-                   //create key 
-                $key = $record->serv_key;
-                $value = $record->serv_name;
-
-                $a[$key] = $value;
-                 
-               }
-               
-             
-               ?>
-                  <div class="col-md-12 form-group ">
-                    <br>
-                        {!! Form::label('service', 'Service', []) !!} <br>
-                        {!! Form::select('service', $a , 'G', ['class' => 'btn well col-md-6 bg-secondary text-white']) !!}
-                  </div><br><hr>
-                        <div class="col-md-12 form-group ">
-                        <center>
-
-                       {!! Form::submit('ADD ORDER', ['class' => 'btn btn-primary btn-rounded']) !!}
-                       <center>
-                           
-                           {!! Form::close() !!}
-                           
-                </div>
+              
+                 <br><hr>
+                       
              </div>
 
-      
+               
+             <div class="col-md-12 form-group ">
+                    <center>
+
+                   {!! Form::submit('Generate', ['class' => 'btn btn-primary btn-rounded']) !!}
+                   <center>
+                       
+                       {!! Form::close() !!}
+                       
+            </div>
                </div>
                 </div>     
                        </div>

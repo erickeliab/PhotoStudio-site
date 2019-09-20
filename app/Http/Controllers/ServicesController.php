@@ -68,7 +68,7 @@ class ServicesController extends Controller
 
                 $path = $request -> file('CoverImage')-> storeAs('public/CoverImages', $filename);
             }else{
-                $filename = 'defaultImage.png';
+                $filename = 'defaultImage.jpeg';
             }
 
 
@@ -77,6 +77,9 @@ class ServicesController extends Controller
       $service -> serv_descr = $request -> input('serv_descr');
       $service -> price = $request -> input('price');
       $service -> serv_name = $request -> input('name');
+      $keying = $request -> input('name');
+      $key = $keying[0].time();
+      $service -> serv_key = $key;
       $service -> imagepath = $filename;
       $service -> save();
 
@@ -157,7 +160,7 @@ class ServicesController extends Controller
     public function destroy($id)
     {
         $sev = Service::find($id);
-        if($sev -> imagepath != 'DefaultImage.jpg'){
+        if($sev -> imagepath != 'DefaultImage.jpeg'){
             
             Storage::delete('public/CoverImages/'.$sev->imagepath);
             

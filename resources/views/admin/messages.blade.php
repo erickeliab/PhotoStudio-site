@@ -58,7 +58,7 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">{{$msg->created_at}}</h5>
+                                <h5 class="card-title">{{$msg->sender}}</h5>
                                 <p>
                                         <?php
                                         $sube = $msg->body;
@@ -73,10 +73,10 @@
                                <hr>
                                <div class="raw"> 
                                   
-                                
+                                <small>{{$msg->phon}}</small>
                                 {!! Form::open(['method' => 'DELETE', 'action' => ['MessagesController@destroy',$msg->id],'class' => 'pull-right']) !!}
                                 
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-rounded']) !!}
                                 
                                 
                                 {!! Form::close() !!}

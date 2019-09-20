@@ -60,7 +60,7 @@
                                 <h5 class="card-title m-b-0">Registered Users</h5>
                            
                                 <div class="table-responsive">
-                            <table class="table col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+                            <table class="table table-hover col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
                                   <thead>
                                     <tr>
                                       
@@ -68,6 +68,7 @@
                                       <th scope="col" class="text-center">Email</th>
                                      
                                       <th scope="col" class="text-center">Phone</th>
+                                      <th scope="col" class="text-center">Authority</th>
                                       <th scope="col" class="text-center">Action</th>
                                     </tr>
                                   </thead>
@@ -80,15 +81,34 @@
                                                 <td class="text-center">{{$user->email}}</td>
                                                 
                                                 <td class="text-center"> {{$user->phone}}
+
                                                 </td>
+
+                                                <td class="text-center"> {{$user->Authority}}
+                                                    
+                                                    </td>
+                                                   
                                                                     {!! Form::open(['method' => 'DELETE', 'action' => ['UsersController@destroy',$user->id],'class' => 'pull-right']) !!}
                                                        
-                                                       <td class="text-center">             {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-fluid']) !!}
-                                                   
+                                                       <td class="text-center">    
+                                                            @if($user->Authority !== 'admin')  
+                                                           
+                                                        @if($user->activated)
+                                                            {!! Form::submit('Deactivate', ['class' => 'btn btn-danger btn-rounded']) !!}
+
+                                                        @else
+                                                        {!! Form::submit(' Activate ', ['class' => 'btn btn-success btn-rounded']) !!}
+                                                        @endif 
+
+                                                        @else
+                                                       <a href="#" class="btn btn-warning btn-rounded">Administrator</a>
+                                                        
+
+                                                        @endif
                                                     </td>
                                             
                                                         {!! Form::close() !!}
-
+                                                   
                                                
                                               </tr>
                                         @endforeach

@@ -56,9 +56,10 @@
                 <div class="container"> @include('inc.alerts')
                     </div>
                     <hr>
-                <div class="container">
-                        <div class="col-md-12 form-group">
-                {{--  BEGINING OF THE FORM  --}}
+                    <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body container">
 
            {!! Form::open(['method' => 'post', 'action' => ['ServicesController@update',$services->service_id],'enctype' => 'multipart/form-data']) !!}
            <div class="row">
@@ -80,16 +81,21 @@
                     {!! Form::label('serv_descr', 'Description', []) !!}
                     {{Form::textarea('serv_descr',$services->serv_descr, ['class' => 'form-control' , 'placeholder' => $services->serv_descr])}}
                </div>
-               <div class="col-md-6 form-group">
+               <div class="col-md-12 form-group">
+                   <small>Browse file to upload</small>
                     {{Form::hidden('path',$services->imagepath, ['class' => 'form-control' , 'placeholder' => $services->price])}}
-                    {!! Form::file('CoverImage') !!}
+                    {!! Form::file('CoverImage',['class' => 'btn btn-default btn-block', 'value'=>'upload a file']) !!}
                     {{Form::hidden('_method','PUT')}}
-                       {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+                      
+                </div>
+
+                <div class="container col-md-12 text-center">
+                        {!! Form::submit('Update', ['class' => 'btn btn-default']) !!}
                 </div>
              </div>
-
+<hr>
              <div class="col-md-6 container">
-                  
+                  <br><br>
                    
                     <p class="mb-5"><img src="{{URL::asset('storage/CoverImages/'.$services->imagepath)}}" alt="" class="img-fluid"></p>
                              
@@ -99,22 +105,26 @@
            </div>
               
 
-               <div class="well text-center container col-md-12">
+              
             {!! Form::close() !!}
-
+                
             {!! Form::open(['method' => 'DELETE', 'action' => ['ServicesController@destroy',$services->service_id],'class' => 'pull-right']) !!}
-                                
-            {!! Form::submit('DELETE THIS  SERVICE', ['class' => 'btn btn-danger']) !!}
+                 <div class="well container col-md-12">    <center>           
+            {!! Form::submit('DELETE THIS  SERVICE', ['class' => 'btn btn-danger btn-rounded']) !!}
+                 </center>
+            </div>
+
            {!! Form::close() !!}
                                 
-              </div>
-
+             
 
            {{--  EBD OF THE FORM  --}}
                     
-               </div>
+           </div>
                 </div>     
-                       </div>
+                     </div>
+                       </div>     
+                             </div>
           
             <footer class="footer text-center">
                 <p>PHOTOSHOOT ADMIN CMS</p>

@@ -28,8 +28,7 @@ class UsersController extends Controller
     {
 
         $user = User::all();
-
-        if(auth()->user()->id !== 1){
+        if(auth()->user()->Authority !== 'admin'){
             return redirect('/dashboards')->with('error','Unauthorized Page');
         }else
         return view('admin.users')->with('users',$user);
@@ -46,7 +45,7 @@ class UsersController extends Controller
         //
     }
     public function getregister(){
-        if(auth()->user()->id !== 1){
+        if(auth()->user()->Authority !== 'admin'){
             return redirect('/dashboards')->with('error','Unauthorized Page');
         }else
         return view('admin.adduser');
@@ -60,7 +59,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->id !== 1){
+        if(auth()->user()->Authority !== 'admin'){
             return redirect('/dashboards')->with('error','Unauthorized Page');
         }else
 
@@ -127,7 +126,9 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { if(auth()->user()->Authority !== 'admin'){
+        return redirect('/dashboards')->with('error','Unauthorized Page');
+    }else
         $usr = User::findOrFail($id);
 
         return view('admin.edituser')->with('user',$usr);
@@ -143,6 +144,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(auth()->user()->Authority !== 'admin'){
+            return redirect('/dashboards')->with('error','Unauthorized Page');
+        }else
+       
+        //the default image;
+        $filename = 'storage/CoverImages/cameraman1567754938.jpg';
+
+        //checking if the image is selected
+        
         if($request -> hasFile('CoverImage')){
             $file = $request -> file('CoverImage')->getClientOriginalName();
             $fileWithought = pathinfo($file , PATHINFO_FILENAME);
@@ -152,16 +162,50 @@ class UsersController extends Controller
 
             $path = $request -> file('CoverImage')-> storeAs('public/CoverImages', $filename);
         }
-        $user = new User;
-        $user->name =$request -> input('name');
-        $user->phone =$request -> input('phone');
-        $user->email =$request -> input('email');
-        $passwd = $request -> input('password');
+        $user = User::find($id);
+
         $user->userimg =  $filename;
-        $passwdnew = $request -> input('password');
+
+        if($request -> input('name')){
+            $user->name =$request -> input('name');
+        }
+        
+        if($request -> input('phone')){
+            $user->phone =$request -> input('phone');
+        }
+        
+        if($request -> input('email')){ 
+             $user->email =$request -> input('email');
+            }
+
+            if($request -> input('Authority') == 'A'){ 
+                $user->Authority = 'admin';
+               }
+      
+        if($request -> input('password') && $request -> input('password')){
+          
+            $passwd = $request -> input('password');
+        
+        
+        $passwdnew = $request -> input('newpassword');
         $pass = array('password' => $passwd );
-        $user->password =Hash::make($pass['password']);
+        
+
+        if($passwd === $passwdnew){
+            $user->password = Hash::make($pass['password']);
+        }else{
+            return redirect('/users/'.$id.'/edit')->with('error','Your passwords didn\'t match');
+
+        }
+   
     }
+            $user -> save();
+
+            return redirect('/users')->with('success','Yoh, you have successfully updated user called '.$user->name.'.');
+           
+        }
+    
+
 
     /**
      * Remove the specified resource from storage.
@@ -169,14 +213,34 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        if(auth()->user()->id !== 1){
+    public function destroy($id){
+
+      
+        
+        if(auth()->user()->Authority !== 'admin'){
             return redirect('/admin.dashboards')->with('error','Unauthorized Page');
         }else
         $user = User::findOrFail($id);
-        $user->delete();
 
-        return redirect('/users')->with('success','user called '.$user->name.' successfully deleted');
+        //generating the message to the frontend
+        $var = ($user->activated)?'deactivated':'activated';
+
+        //Deacttivating and activating the user to the database by password swap
+        if($user->activated){
+            $user->actkey = $user->password;
+            $user->password = Hash::make('key2key');
+        }else {
+            if($user->actkey !== NULL){
+            $user->password = $user->actkey;
+            }
+        }
+        
+        //updating the activation boolean value to the database
+        $user->activated = !$user->activated;
+       
+        $user -> save();
+
+
+        return redirect('/users')->with('success','user called '.$user->name.' successfully '.$var);
     }
 }

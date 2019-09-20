@@ -76,6 +76,20 @@
                                                             {{Form::text('name','', ['class' => 'form-control' , 'placeholder' => ''])}}
                                                           
                                                        </div>
+
+                                                       <div class="row form-group">
+                                                        
+                                                            {!! Form::label('phone', 'phone', []) !!}
+                                                            
+                                                             {{Form::text('phone','', ['class' => 'form-control' ])}}
+                                                           
+                                                        </div>
+                                                        <div class="row form-group">
+                                                                {!! Form::label('Authority', 'Authority', []) !!} <br>
+                                                                {!! Form::select('Authority',['M'=>'member','A'=> 'admin'],'M',['class' => 'text-center col-md-12 col-lg-12 col-sm-12']) !!}
+                                                              
+                                                           </div>
+
                                                        <div class="row form-group">
                                                         
                                                             {!! Form::label('email', 'email', []) !!}
@@ -84,13 +98,6 @@
                                                            
                                                         </div>
 
-                                                        <div class="row form-group">
-                                                        
-                                                                {!! Form::label('phone', 'phone', []) !!}
-                                                                
-                                                                 {{Form::text('phone','', ['class' => 'form-control' ])}}
-                                                               
-                                                            </div>
                                                        <div class="row form-group">
                                                                 {!! Form::label('password', 'Password', []) !!}
                                                                 
@@ -109,12 +116,12 @@
                                                             
                                                         </div>
 
-                                                        <div class="col-md-6 form-group  align-items-center ">
-                                                            
-                                                            {!! Form::file('CoverImage') !!}
+                                                        <div class="col-md-12 form-group  align-items-center ">
+                                                            <small>upload image</small>
+                                                            {!! Form::file('CoverImage',['class' => 'btn btn-rounded','placeholder' => 'upload image']) !!}
                                                             
                                                            <center>
-                                                                {!! Form::submit('Add User', ['class' => 'btn btn-primary']) !!}
+                                                                {!! Form::submit('Add User', ['class' => 'btn btn-primary btn-rounded']) !!}
 
                                                            </center>
                                      

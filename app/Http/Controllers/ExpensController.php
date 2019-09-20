@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Expens;
 
 class ExpensController extends Controller
 {
@@ -13,7 +14,8 @@ class ExpensController extends Controller
      */
     public function index()
     {
-        return view('admin.expenditures');
+        $expens = Expens::all();
+        return view('admin.expenditures')->with('expens',$expens);
     }
 
     /**
@@ -34,7 +36,21 @@ class ExpensController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
+        $this -> validate($request,[
+            'title' => ['required','string'], 
+            'body' => ['required','string'], 
+            'amount' => ['required','string']
+        ]);
+
+            $ex = new Expens;
+            $ex -> tittle = $request->input('title');
+            $ex -> body = $request -> input('body');
+            $ex -> amount = $request -> input('amount');
+
+            $ex->save();
+
+            return redirect('/expens')->with('success','You have successfully added an item to the expence list');
     }
 
     /**

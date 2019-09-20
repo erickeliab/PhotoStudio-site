@@ -62,7 +62,7 @@
               
                 <span class="logo-text">
                  
-                     <h5>PHOTOSHOOT</h5>
+                    <img src="{{URL::asset('storage/CoverImages/logoo1.png')}}" style="" alt="logo" />
                     
                 </span>
            
@@ -80,7 +80,7 @@
                          <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @if(Auth::user()->id == 1)
+                                @if(Auth::user()->Authority == 'admin')
                             <a class="dropdown-item" href="{{URL::asset('/aduser')}}">Add User</a>
                             @endif
                             <a class="dropdown-item" href="{{URL::asset('services/create')}}">Add Services</a>

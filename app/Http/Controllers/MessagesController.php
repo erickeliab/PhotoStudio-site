@@ -54,15 +54,19 @@ class MessagesController extends Controller
 
         $this -> validate ($request, [
             'body' => 'required',
+            'sender' => 'required',
+            'phon' => 'required'
             
         ]);
 
       $message = new MessageModel;
 
       $message -> body = $request -> input('body');
+      $message -> sender = $request -> input('sender');
+      $message -> phon = $request -> input('phon');
       $message -> save();
 
-     return redirect('/contact')->with('success','message successfully created');
+     return redirect('/contact')->with('success','message successfully sent');
     
     }
 

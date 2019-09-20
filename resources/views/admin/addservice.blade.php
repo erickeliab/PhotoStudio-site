@@ -94,7 +94,7 @@
                                                 
                                                  
                                                  </center>
-                                                    {!! Form::submit('ADD SERVICE', ['class' => 'btn btn-primary']) !!}
+                                                    {!! Form::submit('ADD SERVICE', ['class' => 'btn btn-primary btn-rounded']) !!}
                                              </div>
                                              
                                              {!! Form::close() !!}
