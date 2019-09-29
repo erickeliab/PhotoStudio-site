@@ -20,12 +20,12 @@
            @include('inc.admin_navbar')
         <!-- END OF THE NAVIGATION BAR -->
       
-        <div class="page-wrapper">
+        <div class="page-wrapper bg-white">
           
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Services</h4>
+                        <h4 class="page-title">Generate Report</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -48,9 +48,8 @@
             </div>
            <?php //$words = ''; ?>
            
-            @include('inc.board')
-                <hr>
-                <h5>Generate Report</h5>
+      
+               
                 <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -72,10 +71,12 @@
                             
                                            <div class="well container" style="padding:20px;">
                 {{--  BEGINING OF THE FORM  --}}
-                <center><h1>REPORT</h1></center>
-           {!! Form::open(['method' => 'post', 'action' => ['ReportsController@store']]) !!}
+                <center><h1>REPORT</h1></center><hr>
+                <h4>{{$idy}} </h4>
+                <br><small>Put the dates to specify the range of your report before you hit <b>GENERATE </b> to generate your report</small>
+<br>           {!! Form::open(['method' => 'post', 'action' => ['ReportsController@store']]) !!}
            <div class="row well">
-           
+               
             
                
                 
@@ -94,7 +95,9 @@
                     {!! Form::label('date', 'To', []) !!}
                     <div class="input-group">
                     
-                    
+                    {{Form::hidden('reporttype',$idy, [])}}
+
+                    <input type="hidden" name="token" value="<?php echo csrf_token(); ?>">
                      {{Form::text('date','', ['class' => 'form-control' , 'placeholder' => 'mm/dd/yyyy','id'=>'datepicker-autoclose'])}}
                      <div class="input-group-append">
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>

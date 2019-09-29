@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Service;
 use App\Order;
 use App\User;
+use App\Transaction;
 use App\MessageModel;
 use App\Expens;
+use PDF;
 class reportsController extends Controller
 {
    private $aprovednum;
@@ -66,6 +68,9 @@ class reportsController extends Controller
             'date' => 'required'
         ]);
 
+        $dateone = $request->input('initdate');
+        $datetwo = $request->input('date');
+
         $initial =  strtotime( $request->input('initdate'));
         $final =  strtotime( $request->input('date'));
        
@@ -77,10 +82,12 @@ class reportsController extends Controller
 
            
            $services = Service::all();
+
            $messages = MessageModel::whereBetween('created_at', [$from, $to])->get();
            $users = User::whereBetween('created_at', [$from, $to])->get();
            $orders = Order::whereBetween('created_at', [$from, $to])->get();
            $expens = Expens::whereBetween('created_at', [$from, $to])->get();
+           $trans = Transaction::whereBetween('created_at', [$from, $to])->get();
 
           
             
@@ -99,127 +106,131 @@ class reportsController extends Controller
         $d = ($da || $du) ? 1 : 0 ;
        
 
-        if(!$d){
-
-            if($dates['initdate'] > $dates['lastdate']){
-                $msg = 'The initial date should be earlier than the final date';
-               return view('admin.reportgate')->with('error', $msg);
-            }else
-    
-            // PROCESSING THE REQUIRED DETAILS TO THE REPORT
-
-            //number of orders
-            $allorders = count($orders);
-           
-
-            //value of all orders in money
-            $value_all_orders = 0;
-            foreach ($orders as $order ) {
-                $value_all_orders = $value_all_orders + $order->services->price;
-            }
             
-            //number of approved orders
-            $approved = $orders->where('approved','=',1);
-            $aprovednum = count($approved);
-            //value of approved orders 
-            $aprovedvalue = 0;
-            foreach ($approved as $approve) {
-                $aprovedvalue =  $aprovedvalue + $approve->services->price;
-            }
-           
+        $reporttype = $request->input('reporttype');
+        $dat = ['1'=>'Approved','2'=>'Disapproved','3'=>'Partial','4'=>'Full','5'=>'Expenses','6'=>'Transaction'];
+        if($reporttype == 'Approved'){
 
-            //number of non approved orders
-
-            $nonapproved = $orders->where('approved','=',0);
-            $nonaprovednum = count($nonapproved);
-            //value of nonaproved orders
-            $nonaprovedvalue = 0;
-            foreach ($nonapproved as $napprove) {
-                $nonaprovedvalue =  $nonaprovedvalue + $napprove->services->price;
-            }
-           
-
-
-            //number of all services
-            $allservices = count($services);
-
-            //value of all the services in money
-            $servicesvalue = 0;
-            foreach($services as $serv){
-                $servicesvalue = $servicesvalue + $serv->price;
-            }
-            //number of fully paid orders
-            //value of fully paid orders
-            $paidfullyprice = 0;
-            $numpaid = 0;
-            foreach($orders as $odz){
-                if($odz->paid == $odz->services->price){
-                $paidfullyprice = $paidfullyprice + $odz->services->price;
-                $numpaid++;
-                }
-            }
-            //number of partial paid orders
-            //Remain orders with partial payment
-             //value of remain partial payment
-            $paidpartialprice = 0;
-            $partialremain = 0;
-            $numpartial = 0;
-            foreach($orders as $odiz){
-                if(($odiz->paid < $odiz->services->price) && ($odiz->paid !== 0)){
-                $paidpartialprice = $paidpartialprice + $odiz->services->price;
-                $partialremain = $partialremain + ($odiz->services->price - $odiz->paid);
-                $numpartial++;
-                }
-            }
-            //value of partial paid orders
-            //number of all the expenses
-            $numexp = Expens::all()->count();
-            $expvalue = 0;
-           
-            //value of expenses
-            foreach($expens as $expe){
-                $expvalue = $expvalue + $expe->amount;
-            }
-            
-            //number of messages
-            $allmsgs = MessageModel::all()->count();
-            
-            //total income
-            $income = $paidfullyprice + $paidpartialprice;
-
-            //net profit
-            $profit = $income - $expvalue;
-            //the datastructure array of data
-            $datas = [
-                'aprovednum' => $aprovednum,
-                'aprovedvalue' => $aprovedvalue,
-                'nonaprovedvalue' => $nonaprovedvalue,
-                'nonaprovednum' => $nonaprovednum,
-                'allservices' => $allservices,
-                'servicesvalue' => $servicesvalue,
-                'paidfullyprice' => $paidfullyprice,
-                'numpaid' => $numpaid,
-                'paidpartialprice' => $paidpartialprice,
-                'partialremain' =>$partialremain,
-                'numpartial' => $numpartial,
-                'allorders' => $allorders,
-                'allmsgs' => $allmsgs,
-                'numexp' => $numexp,
-                'allordervalue' => $value_all_orders,
-                'expvalue' => $expvalue,
-                'profit' => $profit,
-                'income' => $income,
-              
+        $orderz =  $orders->where('approved','=','1');
+            $dis = [
+                'disy' => $orders->where('approved','=','1'),
                 'datefrom' => date('d-m-y',$initial),
-                'dateto' => date('d-m-y',$final)
-            ];
-           
-            return view('admin.report')->with('datas', $datas); 
+                'cat' => $reporttype,
+                'dateto' => date('d-m-y',$final),
+                'records' => $orderz->count(),
+                'dateone' => $dateone,
+                'datetwo' => $datetwo
 
-        }else 
-        {
-            return view('admin.reportgate')->with('error','the dates shouldn\'t be after today ');
+            ];
+            //$pdf = PDF::loadView('admin.partialreport', $dis);
+        
+            //    return $pdf->download('repo.pdf');
+          
+          //  return $pdf->download('repo.pdf');
+            return view('admin.report')->with('order', $dis); 
+
+
         }
+        if ($reporttype == 'Expenses'){
+         
+
+            $dis = [
+                'disy' => $expens,
+                'datefrom' => date('d-m-y',$initial),
+                'cat' => $reporttype,
+                'dateto' => date('d-m-y',$final),
+                'records' => $expens->count(),
+                'dateone' => $dateone,
+                'datetwo' => $datetwo
+
+            ];
+           // return $expens;
+            $pdf = PDF::loadView('admin.expencepdf', $dis);
+          
+                //return $pdf->download('repo.pdf');
+                //return $datetwo;
+               return view('admin.expencereport')->with('order', $dis);
+           
+            
+        }
+        if ($reporttype == 'Transaction'){
+         
+
+            $dis = [
+                'disy' => $trans,
+                'datefrom' => date('d-m-y',$initial),
+                'cat' => $reporttype,
+                'dateto' => date('d-m-y',$final),
+                'records' => $trans->count(),
+                'dateone' => $dateone,
+                'datetwo' => $datetwo
+            ];
+
+       // return $dis;
+            $pdf = PDF::loadView('admin.odreport', $dis);
+           
+               // return $pdf->download('repo.pdf');
+                   
+             return view('admin.transactionreport')->with('order', $dis);
+           
+            
+        } if($reporttype == 'Disapproved'){
+
+            $orderz =  $orders->where('approved','=','0');
+                $dis = [
+                    'disy' => $orders->where('approved','=','1'),
+                    'datefrom' => date('d-m-y',$initial),
+                    'cat' => $reporttype,
+                    'dateto' => date('d-m-y',$final),
+                    'records' => $orderz->count(),
+                    'dateone' => $dateone,
+                    'datetwo' => $datetwo
+    
+                ];
+                //$pdf = PDF::loadView('admin.partialreport', $dis);
+            
+                //    return $pdf->download('repo.pdf');
+              
+              //  return $pdf->download('repo.pdf');
+                return view('admin.report')->with('order', $dis); 
+    
+    
+            }elseif ($reporttype == 'Partial'){
+
+       
+             
+            $dis = [
+                'disy' => $orders->where('approved','!==','new'),
+                'datefrom' => date('d-m-y',$initial),
+                'cat' => $reporttype,
+                'dateto' => date('d-m-y',$final),
+                'records' => $orders->count(),
+                'dateone' => $dateone,
+                'datetwo' => $datetwo
+
+            ];
+            $pdf = PDF::loadView('admin.partialreport', $dis);
+      
+                   return view('admin.report')->with('order', $dis); 
+             }
+             elseif ($reporttype == 'Full'){
+
+            $dis = [
+                'disy' => $orders->where('approved','!==','new'),
+                'datefrom' => date('d-m-y',$initial),
+                'dateto' => date('d-m-y',$final),
+                'cat' => $reporttype,
+                'records' => $orders->count(),
+                'dateone' => $dateone,
+                'datetwo' => $datetwo
+                
+            ];
+           // $pdf = PDF::loadView('admin.partialreport', $dis);
+          
+             //   return $pdf->download('repo.pdf');
+            
+            return view('admin.report')->with('order', $dis); 
+           }
     }
    
     public function create()
@@ -259,7 +270,10 @@ class reportsController extends Controller
      */
     public function show($id)
     {
-        //
+       // return $id;
+       $dat = ['1'=>'Approved','2'=>'Disapproved','3'=>'Partial','4'=>'Full','5'=>'Expenses','6'=>'Transaction'];
+    
+        return view('admin.reportgate')->with('idy',$dat[$id]);
     }
 
     /**
@@ -282,7 +296,46 @@ class reportsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $initial =  strtotime( $request->input('initdate'));
+        $final =  strtotime( $request->input('date'));
+       
+
+            
+        
+           $from =  date('Y-m-d H:i:s',$initial); 
+            $to = date('Y-m-d H:i:s',$final); 
+
+           
+           $services = Service::all();
+           $messages = MessageModel::whereBetween('created_at', [$from, $to])->get();
+           $users = User::whereBetween('created_at', [$from, $to])->get();
+           $orders = Order::whereBetween('created_at', [$from, $to])->get();
+           $expens = Expens::whereBetween('created_at', [$from, $to])->get();
+           $trans = Transaction::whereBetween('created_at', [$from, $to])->get();
+
+           $reporttype = $id;
+           $dat = ['1'=>'Approved','2'=>'Disapproved','3'=>'Partial','4'=>'Full','5'=>'Expenses','6'=>'Transaction'];
+          
+
+        if ($reporttype == 'Partial'){
+
+       
+             
+            $dis = [
+                'disy' => $orders->where('approved','!==','new'),
+                'datefrom' => date('d-m-y',$initial),
+                'cat' => $reporttype,
+                'dateto' => date('d-m-y',$final),
+                'records' => $orders->count(),
+
+            ];
+            $pdf = PDF::loadView('admin.partialreport', $dis);
+      if($request->input('download')){
+                return $pdf->download('repo.pdf');
+      }
+                   return redirect('/reports')->with('order', $dis); 
+             }
+        return $id;
     }
 
     /**

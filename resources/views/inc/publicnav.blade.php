@@ -39,6 +39,7 @@
           $home = Request::is('/') ? 'active' : '';
           $about = Request::is('about') ? 'active' : '';
           $contact = Request::is('contact') ? 'active' : '';
+          $gallery = Request::is('galleryhome') ? 'active' : '';
           ?>
           <div class="collapse navbar-collapse" id="navbarsExample05">
             <ul class="navbar-nav ml-auto pl-lg-5 pl-0">
@@ -54,6 +55,9 @@
                           <li class="nav-item {{$about}}">
                             <a class="nav-link"  href="{{URL::asset('/about')}}">About</a>
                           </li>
+                          <li class="nav-item {{$gallery}}">
+                              <a class="nav-link"  href="{{URL::asset('/galleryhome')}}">Gallery</a>
+                            </li>
                           <li class="nav-item {{$contact}}">
                             <a class="nav-link"  href="{{URL::asset('/contact')}}">Contact Us</a>
                           </li>
@@ -73,7 +77,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item text-dark"$order->services>  {{ __('Dashboard') }}</a>
+                        <a class="dropdown-item text-dark" href="{{ route('login') }}">  {{ __('Dashboard') }}</a>
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();

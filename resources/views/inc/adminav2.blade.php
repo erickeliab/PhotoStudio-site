@@ -84,7 +84,9 @@
                             <a class="dropdown-item" href="{{URL::asset('/aduser')}}">Add User</a>
                             @endif
                             <a class="dropdown-item" href="{{URL::asset('services/create')}}">Add Services</a>
-                            <a class="dropdown-item" href="{{URL::asset('orders/create')}}">Add Order</a>                            
+                            <a class="dropdown-item" href="{{URL::asset('orders/create')}}">Add Order</a>      
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#add-new-image" class="dropdown-item">
+                                 Add Image</a>                      
                         </div>
                     </li>
                    

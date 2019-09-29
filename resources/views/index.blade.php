@@ -3,10 +3,11 @@
 
     @section('content')
     <section class="home-slider owl-carousel">
-
-        @if(count($services) > 0 )
-        @foreach ($services as $item)
-      <div class="slider-item" style="background-image: url('storage/CoverImages/{{$item->imagepath}}')">
+<?php use App\Gallery; $gallery = Gallery::all(); ?>
+        @if(count($gallery) > 0 )
+        @foreach ($gallery as $item)
+        @if($item->show)
+      <div class="slider-item" style="background-image: url('storage/CoverImages/{{$item->path}}')">
         
        
 
@@ -14,9 +15,9 @@
         <div class="container">
             <div class="row slider-text align-items-center justify-content-center">
               <div class="col-md-8 text-center col-sm-12 element-animate">
-                <h1>{{$item->serv_name}}</h1>
+                <h1></h1>
                 <p class="mb-5">
-       {{$item->serv_descr}}
+       {{$item->words}} 
         </p>
                 <p><a href="{{URL::asset('/booking')}}" class="btn btn-white btn-outline-white">Book Now</a></p>
               </div>
@@ -25,7 +26,7 @@
   
         </div>
   
-            
+            @endif
         @endforeach
         
         @else
@@ -55,7 +56,7 @@
              
                  
                     
-                      <img src="storage/CoverImages/{{$item->imagepath}}" alt="" class="img-fluid rounded-circle">
+                      <img src="storage/CoverImages/{{$item->imagepath}}" alt="" class="img-fluid rounded-circle" style="height:120px; width:120px;">
                     
                     
                     </span>
@@ -117,16 +118,14 @@
   <hr>
     <section class="section bg-light element-animate">
 
-      <div class="clearfix mb-5 pb-5">
-        <div class="container-fluid">
+    
           <div class="row">
             <div class="col-md-12 text-center heading-wrap">
               <h2>Others</h2>
-              <span class="back-text-dark">Others</span>
+              
             </div>
           </div>
-        </div>
-      </div>
+     
 
       <div class="container">
         <div class="row">
@@ -168,14 +167,14 @@
   <section>
       <div class="container">
           <div class="row">
-            <div class="major-caousel js-carousel-1 owl-carousel"  style="width: 100%;height: 100%;" >
-                @if (count($services) > 0)
+            <div class="major-caousel js-carousel-1 owl-carousel" id="owl-demo" style="width: 100%;height: 100%;" >
+                @if (count($gallery) > 0)
     
-                @foreach ($services as $service)
+                @foreach ($gallery as $service)
                 
               <div class="item">
-                <div class="media d-block media-custom text-center">
-                  <a href="storage/CoverImages/{{$service->imagepath}}"><img src="storage/CoverImages/{{$service->imagepath}}" alt="Image Placeholder" class="img-fluid" style="height:250px;"></a>
+                <div class=" text-center">
+                  <a href="storage/CoverImages/{{$service->path}}"><img src="storage/CoverImages/{{$service->path}}" alt="Image Placeholder" class="img-fluid" style="height:200px;width:90%;"></a>
                   <div class="media-body">
                   
                   </div>
@@ -191,5 +190,8 @@
           </div>
       </div>
   </section>
+  <section>
+
+
 
 @endsection

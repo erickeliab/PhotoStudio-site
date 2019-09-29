@@ -76,7 +76,7 @@
                                       @if(count($users)>0)
                                         @foreach($users as $user)
                                         <tr>
-                                                <th scope="row" > <a href="users/{{$user->id}}/edit" class="link-item text-dark"><h5 class="text-center">{{$user->name}}</h5></a></th>
+                                                <th scope="row" > <a href="users/{{$user->user_id}}/edit" class="link-item text-dark"><h5 class="text-center">{{$user->name}}</h5></a></th>
                                               
                                                 <td class="text-center">{{$user->email}}</td>
                                                 
@@ -88,7 +88,7 @@
                                                     
                                                     </td>
                                                    
-                                                                    {!! Form::open(['method' => 'DELETE', 'action' => ['UsersController@destroy',$user->id],'class' => 'pull-right']) !!}
+                                                                    {!! Form::open(['method' => 'DELETE', 'action' => ['UsersController@destroy',$user->user_id],'class' => 'pull-right']) !!}
                                                        
                                                        <td class="text-center">    
                                                             @if($user->Authority !== 'admin')  

@@ -96,7 +96,7 @@
     animateIn: 'fadeIn',
     nav: true,
     autoplayHoverPause: true,
-    items: 3,
+    items: 4,
     navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
     responsive:{
       0:{
@@ -107,8 +107,12 @@
         items:2,
         nav:false
       },
-      1000:{
+      600:{
         items:3,
+        nav:false
+      },
+      1000:{
+        items:4,
         nav:true,
         loop:false
       }

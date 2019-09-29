@@ -24,6 +24,7 @@
                 @include('inc.adminav2')
         </header>
         <!-- HERE GOES THE SIDE BAR THAT NAVIGATES TO OTHER ADNMIN PAGES -->
+        
             @include('inc.admin_navbar')
         <!-- END OF THE NAVIGATION BAR -->
         <div class="page-wrapper">

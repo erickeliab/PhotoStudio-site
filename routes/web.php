@@ -47,8 +47,20 @@
         Route::get('/admmessages', 'PagesController@admmessages'); 
 
         //MESSAGES ROUTES 
+        Route::resource('repo','ReportsController@repo');
+        Route::resource('downloads','DownloadController');
         Route::resource('messages','MessagesController');
+        // Route::get('/repo', function() {
+        //     $pdf = PDF::loadView('admin.report');
+        //     return $pdf->download('repo.pdf');
+           
+        // });
+        Route::get('galleryhome','GalleryController@galleryhome');
+        Route::get('slider','GalleryController@showslide');
 
+        Route::get('showothers','GalleryController@showothers');
+        
+        Route::resource('galleries','GalleryController');
 
         Route::resource('orders', 'OrdersController');
 
@@ -56,9 +68,13 @@
 
         Route::resource('services', 'ServicesController');
 
+        Route::resource('trans', 'TransactionsController');
+
         Route::resource('expens', 'ExpensController');
 
         Route::resource('finances', 'FinanceController');
+
+        Route::resource('approved', 'approvedController');
 
         Route::resource('reports', 'ReportsController');
 

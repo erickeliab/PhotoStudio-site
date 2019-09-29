@@ -94,7 +94,9 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        //
+        $oders = Order::find($id);
+       
+        return view('admin.singleorder')->with('od',$oders);
     }
 
     /**
@@ -165,6 +167,11 @@ class OrdersController extends Controller
         return redirect('/orders')->with('success','You have successfully updated an order');
     }
 
+    public function approved(Request $request){
+        $odr = Order::find($id);
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -175,9 +182,10 @@ class OrdersController extends Controller
     {
         
         $odr = Order::find($id);
-        $var = ($odr->approved) ? 'disaproved' : 'approved';
-        $odr->approved = !$odr->approved;
+        
+        $odr->approved = 1;
+      
         $odr->save();
-        return redirect('/orders')->with('success','order successfully '.$var);
+        return redirect('/orders/'.$id)->with('success','order successfully Approved');
     }
 }

@@ -21,6 +21,14 @@
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="{{url('css/style.css')}}">
+    <style>
+    
+    #owl-demo .item img{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    </style>
     <script> 
         console.log('helloworld');
       function truncedText(Id,maxleght){
@@ -92,7 +100,7 @@
         </div>
         
       </div>
-      <div class="row">
+      <div class="row" style="margin-top:-4em; margin-bottom:-3em;">
           <div class="col-12 text-md-center text-center">
             <p>
         Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
@@ -104,7 +112,21 @@
 
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#cf1d16"/></svg></div>
-
+    <script>
+        $(document).ready(function() {
+           
+        $("#owl-demo")({
+       
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+       
+            items : 4,
+            itemsDesktop : [1199,3],
+            itemsDesktopSmall : [979,3]
+       
+        });
+       
+      });
+      </script>
      
     <script src="{{url('js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{url('js/popper.min.js')}}"></script>
@@ -123,6 +145,11 @@
 {{--  date picker  --}}
 <script src="{{URL::asset('dist/dist/js/bootstrap-datepicker.min.js')}}"></script>
 {{--  <!-- <script src="{{URL::asset('dist/js/pages/dashboards/dashboard1.js')}}"></script> -->  --}}
+
+
+
+
+
 
   </body>
 </html>

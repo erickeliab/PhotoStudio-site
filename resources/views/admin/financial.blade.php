@@ -46,7 +46,6 @@
                                               <th scope="col" class="text-center font-weight-bold">Amount</th>
                                               <th scope="col" class="text-center font-weight-bold">Paid</th>
                                               <th scope="col" class="text-center font-weight-bold">Remain</th>
-                                              <th  scope="col" class="text-center font-weight-bold">Details</th>
                                               <th scope="col" class="text-center font-weight-bold">Payment</th>
                                               
                                               <th scope="col" class="text-center font-weight-bold">Action</th>
@@ -82,8 +81,7 @@
                                                         //$sum = $flot1  $flot; 
                                                         $diff = $flot1-$flot; 
                                                         echo  $diff.'/='; ?> </td>
-                                                        <td> <a href="javascript:void(0)" onclick="parseId({{$od->order_id}}, '{{$od->phone}}', '{{$od->username}}' ,'{{$od->service}}', {{$od->services->price}},{{$od->paid}},'{{$od->ocdate}}','{{$od->created_at}}' );" data-toggle="modal" data-target="#add-new-event" style=";" class="btn btn-secondary btn-rounded waves-effect waves-light">
-                                                            </i> View File</a></td> 
+                                                       
                                                       <td class="text-center text-warning">
                                                           @if($diff == $flot1)
                                                         Not Paid
@@ -99,9 +97,10 @@
                                                
                                         
                                                     <td class="text-center">
-                                                            <a href="{{URL::asset('/orders/'.$ody->order_id.'/edit')}}" class='btn btn-danger btn-rounded'>Change</a>
-                                                           
-                                                    </td>
+                                                            <a href="{{URL::asset('orders/'.$od->order_id)}}" class="text-center btn btn-secondary btn-rounded text-black">Open File</a>
+                                                                
+                                                                
+                                                        </td>
                                                    
                                                        
                                                       </tr>

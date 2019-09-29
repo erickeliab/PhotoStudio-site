@@ -54,71 +54,75 @@
                         <center> 
                         <h5 class="card-title m-b-0">Recent Orders</h5><br>
                         </center>
+                        @if(count($order) > 0 )
                         <div class="table-responsive">
-                    <table class="table table-hover col-md-12 col-lg-12 col-xl-12">
-                          <thead>
-                            <tr>
-                              
-                              <th scope="col" class="text-center">Order</th>
-                              <th scope="col" class="text-center">Customer</th>
-                             
-                              <th scope="col" class="text-center">Phone</th>
-                              <th scope="col" class="text-center">Details</th>
-                              <th scope="col" class="text-center">Date</th>
-                              <th scope="col" class="text-center">Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                                @if(count($orders) > 0 )
-
-                                @foreach($orders as $od)
-                                <?php $a++; ?>
-                                @if($a < 4)
-                                <tr>
-                                        <th scope="row" class="text-center"> <a href="orders/{{$od->order_id}}/edit" class="link-item justify-content-center container text-dark"><h5> {{$od->service}} <br>
-                                        <small>received on {{$od->created_at}}</small>
-                                        
-                                        </h5></a></th>
+                            <table class="table col-md-12 col-lg-12 col-xl-12">
+                                  <thead>
+                                    <tr>
                                       
-                                        <td class="text-center">{{$od->username}}</td>
+                                      <th scope="col" class="text-center">Event Type</th>
+                                      <th scope="col" class="text-center">Customer Name</th>
+                                     
+                                      <th scope="col" class="text-center">Phone</th>
+                                     
+                                      <th scope="col" class="text-center">Date</th>
+                                      <th scope="col" class="text-center">Status</th>
+                                      <th scope="col" class="text-center">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      
+
+                                        @foreach($order as $od)
+                                        <tr>
+                                                <th scope="row" class="text-center"> <a href="orders/{{$od->order_id}}/edit" class="link-item justify-content-center container text-dark"> {{$od->service}} 
+                                              
+                                                
+                                                </a></th>
+                                              
+                                                <td class="text-center">{{$od->username}}</td>
+                                                
+                                                <td class="text-center"> {{$od->phone}} </td>
+
                                         
-                                        <td class="text-center"> {{$od->phone}} </td> 
+    
+                                              <td class="text-center">  {{$od->ocdate}} </td>
+                                              <td class="text-center">
+                                                @if($od->approved == '1')
+                                                <span class="text-success text-center">Approved</span>
+                                                @elseif ($od->approved == 'new')
 
-                                        <td> <a href="javascript:void(0)" onclick="parseId({{$od->order_id}}, '{{$od->phone}}', '{{$od->username}}' ,'{{$od->service}}', {{$od->services->price}},{{$od->paid}},'{{$od->ocdate}}','{{$od->created_at}}' );" data-toggle="modal" data-target="#add-new-event" style=";" class="btn btn-secondary btn-rounded waves-effect waves-light">
-                                                </i> View File</a></td> 
+                                                <span class="text-warning text-center">New </span>
+                                                @else
+                                                <span class="text-danger text-center">Not Approved</span>
+                                                
+                                                
+                                          
+                                                @endif
+                                              </td>
+                                              
 
-                                      <td class="text-center">  {{$od->ocdate}} </td>
-
-                                                <td>
-
-                                {!! Form::open(['method' => 'DELETE', 'action' => ['OrdersController@destroy',$od->order_id],'class' => 'pull-right','id' => 'frm']) !!}
-
-                             
-                                <td class="text-center">
-                                        @if($od->approved)
-                                        {!! Form::submit('Disaprove', ['class' => 'btn btn-danger btn-rounded']) !!}
-                                        @else 
-                                        {!! Form::submit('Aproove', ['class' => 'btn btn-success btn-rounded']) !!}
-                                        @endif
-                                        
-                                        
-                                </td>
-                               
-                               
-                        
-                        {!! Form::close() !!}
-                                                </td>
-                                   
+                                
+                                            <td class="text-center">
+                                                <a href="{{URL::asset('orders/'.$od->order_id)}}" class="text-center btn btn-secondary btn-rounded text-black">Open File</a>
+                                                    
+                                                    
+                                            </td>
                                        
-                                      </tr>
-                                      @endif
-                                @endforeach
-                                     @endif
+                                               
+                                              </tr>
+                                        @endforeach
+                                            
+                                            
                                     
-                            
-                          </tbody>
-                    </table>
+                                  </tbody>
+                            </table>
                         </div>
+                        @else 
+                        <div class="container well col-md12">
+                            <h3 class="text-warning">Ooops, there is no any new order yet!</h3>
+                        </div>
+                        @endif
                 </div>
                 </div>
             </div>

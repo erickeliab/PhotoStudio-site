@@ -53,6 +53,42 @@
            </div>
        </div>
    </div>
+
+
+
+<!-- Modal Add Category -->
+<div class="modal fade none-border" id="add-new-image">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Browse an image</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                    <div class="well container">
+                                          
+                            {!! Form::open(['method' => 'post', 'action' => ['GalleryController@store'],'enctype'=>'multipart/form-data']) !!}
+
+                                            
+                                            {!! Form::file('galleryImage', ['class' => 'btn btn-block']) !!}
+                                            
+                                        
+                                  
+                                         <div class="modal-footer">
+                                                {!! Form::submit('Save', ['class' => 'btn btn-danger']) !!}
+                                                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                            </div>
+
+                                         {!! Form::close() !!}  
+
+
+                       </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- END MODAL -->
    <!-- Modal Add Category -->
    <div class="modal fade none-border" id="add-new-event">
        <div class="modal-dialog">
