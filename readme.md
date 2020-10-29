@@ -4,18 +4,18 @@ This website is ideally for photo studio owner to manage their businesses. It in
 
 ## Business Process ##
 The owner (admin) wanted to have a website that would help them create read and update
-    - Photos
-    - Services
-    - Transactional Records
-    - Reports
-    - Users and their corresponding access rights
-    - Orders
-    - Messages
-    - Discounts
+    1. Photos
+    2. Services
+    3. Transactional Records
+    4. Reports
+    5. Users and their corresponding access rights
+    6. Orders
+    7. Messages
+    8. Discounts
     
 Also functionlity to enable the customers 
-    - To press order for the services
-    - To view their orders
+    1. To press order for the services
+    2. To view their orders
     
 ## Development Strategy ##
 
